@@ -1,3 +1,4 @@
+using Livros.Dominio.Servicos.Assunto.Cadastrar;
 using Livros.TesteUnitario.Mocks.Dominio.Entidades;
 using System.ComponentModel.DataAnnotations;
 
@@ -12,10 +13,9 @@ public class ServicoCadastroAssuntoTeste
         var assuntoEnviado = AssuntoMock.GerarObjetoNulo();
 
         // Act
-        var resultado = new { Erros = new List<string>() };
+        var resultado = new ServicoCadastroAssunto().CadastrarAsync(assuntoEnviado!, CancellationToken.None);
 
         // Assert
-        Assert.Null(resultado);
-        Assert.Contains(resultado!.Erros, erro => erro == "Assunto não enviado");
+        Assert.Equal(AssuntoErro.NaoInformado, resultado.Value);
     }
 }
