@@ -13,9 +13,24 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Infraestrutura", "4 - I
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Teste", "5 - Teste", "{AF9C7369-D7A8-4AA8-87EF-C69A980FA0E7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Livros.Dominio", "src\Livros.Dominio\Livros.Dominio.csproj", "{D0E625AE-01AA-4FAF-A4BD-A67461A84D5A}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D0E625AE-01AA-4FAF-A4BD-A67461A84D5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0E625AE-01AA-4FAF-A4BD-A67461A84D5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0E625AE-01AA-4FAF-A4BD-A67461A84D5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0E625AE-01AA-4FAF-A4BD-A67461A84D5A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D0E625AE-01AA-4FAF-A4BD-A67461A84D5A} = {BA62A64A-F872-4177-816E-5B0D8523F673}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CFEB420F-0594-4F8F-A021-AC946D0339F8}
