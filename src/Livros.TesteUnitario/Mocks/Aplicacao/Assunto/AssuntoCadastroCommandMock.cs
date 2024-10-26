@@ -17,4 +17,13 @@ public class AssuntoCadastroCommandMock : Faker<AssuntoCadastroCommand>
     {
         return new AssuntoCadastroCommandMock().Generate();
     }
+
+    public static AssuntoCadastroCommand GerarObjetoInvalido()
+    {
+        var assuntoInvalido = GerarObjetoValido();
+
+        assuntoInvalido.Descricao = new Faker().Lorem.Random.String(21, 100);
+
+        return assuntoInvalido;
+    }
 }

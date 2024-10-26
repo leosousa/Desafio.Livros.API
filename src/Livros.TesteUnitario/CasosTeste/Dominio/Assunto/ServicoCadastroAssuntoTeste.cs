@@ -34,7 +34,7 @@ public class ServicoCadastroAssuntoTeste
         var resultado = await GerarCenario().CadastrarAsync(assuntoEnviado!, CancellationToken.None);
 
         // Assert
-        Assert.Equal(AssuntoErro.NaoInformado, resultado.Value);
+        Assert.Equal(CadastroAssuntoRetorno.NaoInformado, resultado.Value);
     }
 
     [Fact(DisplayName = "Deve retornar inválido quando o assunto não passar em uma validação")]
@@ -46,11 +46,14 @@ public class ServicoCadastroAssuntoTeste
 
         _validator.Setup(validator => validator.Validate(It.IsAny<Assunto>())).Returns(assuntoValido);
 
+        var servico = GerarCenario();
+
         // Act
-        var resultado = await GerarCenario().CadastrarAsync(assuntoEnviado!, CancellationToken.None);
+        var resultado = await servico.CadastrarAsync(assuntoEnviado!, CancellationToken.None);
 
         // Assert
-        Assert.Equal(AssuntoErro.Invalido, resultado.Value);
+        Assert.Equal(CadastroAssuntoRetorno.Invalido, resultado.Value);
+        Assert.NotEmpty(servico.Notifications);
     }
 
     [Fact(DisplayName = "Deve retornar erro qando ocorrer algum erro de infra")]
@@ -67,11 +70,14 @@ public class ServicoCadastroAssuntoTeste
             repositorio.CadastrarAsync(It.IsAny<Assunto>())
         ).ReturnsAsync(assuntoRetornado!);
 
+        var servico = GerarCenario();
+
         // Act
-        var resultado = await GerarCenario().CadastrarAsync(assuntoEnviado!, CancellationToken.None);
+        var resultado = await servico.CadastrarAsync(assuntoEnviado!, CancellationToken.None);
 
         // Assert
-        Assert.Equal(AssuntoErro.Erro, resultado.Value);
+        Assert.Equal(CadastroAssuntoRetorno.Erro, resultado.Value);
+        Assert.Empty(servico.Notifications);
     }
 
     [Fact(DisplayName = "Deve retornar o produto cadastrado quando cadastro for realizado com sucesso")]
@@ -88,10 +94,13 @@ public class ServicoCadastroAssuntoTeste
             repositorio.CadastrarAsync(It.IsAny<Assunto>())
         ).ReturnsAsync(assuntoRetornado!);
 
+        var servico = GerarCenario();
+
         // Act
-        var resultado = await GerarCenario().CadastrarAsync(assuntoEnviado!, CancellationToken.None);
+        var resultado = await servico.CadastrarAsync(assuntoEnviado!, CancellationToken.None);
 
         // Assert
         Assert.NotNull(resultado.Value);
+        Assert.Empty(servico.Notifications);
     }
 }
