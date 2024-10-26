@@ -32,16 +32,8 @@ public class ValidationResultMock : Faker<FluentValidation.Results.ValidationRes
         return new ValidationResultMock(nomePropriedade, mensagemErro).Generate();
     }
 
-    public static FluentValidation.Results.ValidationResult GerarObjetoInvalido(string? nomePropriedade = null, string? mensagemErro = null)
+    public static FluentValidation.Results.ValidationResult GerarObjetoInvalido(string nomePropriedade, string mensagemErro)
     {
-        if (nomePropriedade is null)
-        {
-            var faker = new Faker();
-
-            nomePropriedade = faker.Random.String(length: 40);
-            mensagemErro = faker.Random.String(length: 255);
-        }
-
         return new ValidationResultMock(nomePropriedade, mensagemErro).Generate();
     }
 }
