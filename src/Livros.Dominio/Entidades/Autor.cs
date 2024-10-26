@@ -5,6 +5,11 @@
 /// </summary>
 public class Autor : Entidade
 {
+    public Autor(string nome)
+    {
+        Nome = nome;
+    }
+
     /// <summary>
     /// Nome do autor
     /// </summary>

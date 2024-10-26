@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Teste", "5 - Teste", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Livros.Dominio", "src\Livros.Dominio\Livros.Dominio.csproj", "{D0E625AE-01AA-4FAF-A4BD-A67461A84D5A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Livros.TesteUnitario", "src\Livros.TesteUnitario\Livros.TesteUnitario.csproj", "{58BF528B-7D7B-4767-90A0-A12C5C90FA9D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,12 +27,17 @@ Global
 		{D0E625AE-01AA-4FAF-A4BD-A67461A84D5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0E625AE-01AA-4FAF-A4BD-A67461A84D5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0E625AE-01AA-4FAF-A4BD-A67461A84D5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58BF528B-7D7B-4767-90A0-A12C5C90FA9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58BF528B-7D7B-4767-90A0-A12C5C90FA9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58BF528B-7D7B-4767-90A0-A12C5C90FA9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58BF528B-7D7B-4767-90A0-A12C5C90FA9D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D0E625AE-01AA-4FAF-A4BD-A67461A84D5A} = {BA62A64A-F872-4177-816E-5B0D8523F673}
+		{58BF528B-7D7B-4767-90A0-A12C5C90FA9D} = {AF9C7369-D7A8-4AA8-87EF-C69A980FA0E7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CFEB420F-0594-4F8F-A021-AC946D0339F8}
