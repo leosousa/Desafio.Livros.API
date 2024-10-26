@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Livros.Aplicacao\Livros.Aplicacao.csproj" />
     <ProjectReference Include="..\Livros.Dominio\Livros.Dominio.csproj" />
   </ItemGroup>
 
