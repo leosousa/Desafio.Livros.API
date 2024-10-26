@@ -1,0 +1,12 @@
+﻿namespace Livros.Dominio.Entidades;
+
+/// <summary>
+/// Armazena um autor de livros
+/// </summary>
+public class Autor : Entidade
+{
+    /// <summary>
+    /// Nome do autor
+    /// </summary>
+    public string Nome { get; private set; }
+}
