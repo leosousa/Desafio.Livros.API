@@ -24,8 +24,8 @@ public class ServicoCadastroAssuntoTeste
         return new ServicoCadastroAssunto(_validator.Object, _repositorioAssunto.Object);
     }
 
-    [Fact(DisplayName = "Não deve tentar cadastrar quanto o assunto não for enviado")]
-    public async Task NaoDeveCadastrar_QuandoAssuntoNulo()
+    [Fact(DisplayName = "Deve retornar \"não informado\" quanto o assunto não for enviado")]
+    public async Task DeveRetornarNaoInformado_QuandoAssuntoForNulo()
     {
         // Arrange
         var assuntoEnviado = AssuntoMock.GerarObjetoNulo();
@@ -37,8 +37,8 @@ public class ServicoCadastroAssuntoTeste
         Assert.Equal(AssuntoErro.NaoInformado, resultado.Value);
     }
 
-    [Fact(DisplayName = "Não deve tentar cadastrar quanto o assunto for inválido")]
-    public async Task NaoDeveCadastrar_QuandoAssuntoForInvalido()
+    [Fact(DisplayName = "Deve retornar inválido quando o assunto não passar em uma validação")]
+    public async Task DeveRetornarInvalido_QuandoAssuntoNaoPassarEmUmaValidacao()
     {
         // Arrange
         var assuntoEnviado = AssuntoMock.GerarObjetoInvalido();
@@ -53,8 +53,8 @@ public class ServicoCadastroAssuntoTeste
         Assert.Equal(AssuntoErro.Invalido, resultado.Value);
     }
 
-    [Fact(DisplayName = "Não deve cadastrar quando ocorrer um erro de infra")]
-    public async Task NaoDeveCadastrar_QuandoHouverErroInfra()
+    [Fact(DisplayName = "Deve retornar erro qando ocorrer algum erro de infra")]
+    public async Task DeveRetornarErro_QuandoHouverErroInfra()
     {
         // Arrange
         var assuntoEnviado = AssuntoMock.GerarObjetoValido();
@@ -74,8 +74,8 @@ public class ServicoCadastroAssuntoTeste
         Assert.Equal(AssuntoErro.Erro, resultado.Value);
     }
 
-    [Fact(DisplayName = "Deve cadastrar quando assunto for válido")]
-    public async Task DeveCadastrar_QuandoAssuntoForValido()
+    [Fact(DisplayName = "Deve retornar o produto cadastrado quando cadastro for realizado com sucesso")]
+    public async Task DeveRetornarProdutoCadastrado_QuandoCadastroRealizadoComSucesso()
     {
         // Arrange
         var assuntoEnviado = AssuntoMock.GerarObjetoValido();
