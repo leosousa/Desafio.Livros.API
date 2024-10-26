@@ -5,6 +5,21 @@
 /// </summary>
 public class Livro : Entidade
 {
+    public Livro(string titulo, 
+        string editora, 
+        int edicao, 
+        int anoPublicacao, 
+        ICollection<Autor> autores, 
+        ICollection<Assunto> assuntos)
+    {
+        Titulo = titulo;
+        Editora = editora;
+        Edicao = edicao;
+        AnoPublicacao = anoPublicacao;
+        Autores = autores;
+        Assuntos = assuntos;
+    }
+
     /// <summary>
     /// Título do livro
     /// </summary>

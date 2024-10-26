@@ -5,6 +5,11 @@
 /// </summary>
 public class Assunto : Entidade
 {
+    public Assunto(string descricao)
+    {
+        Descricao = descricao;
+    }
+
     /// <summary>
     /// Descrição do assunto
     /// </summary>
