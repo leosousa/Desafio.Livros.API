@@ -3,5 +3,6 @@
 public enum AssuntoErro
 {
     NaoInformado,
-    Invalido
+    Invalido,
+    Erro
 }
