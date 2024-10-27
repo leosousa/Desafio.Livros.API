@@ -15,6 +15,6 @@ public class AssuntoConfiguracao : IEntityTypeConfiguration<Assunto>
         builder
            .Property(propriedade => propriedade.Descricao)
            .IsRequired()
-           .HasMaxLength(20);
+           .HasMaxLength(Assunto.ASSUNTO_DESCRICAO_MAXIMO_CARACTERES);
     }
 }

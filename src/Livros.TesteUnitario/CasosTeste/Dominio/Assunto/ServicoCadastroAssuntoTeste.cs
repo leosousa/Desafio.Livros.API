@@ -44,7 +44,7 @@ public class ServicoCadastroAssuntoTeste
         var assuntoEnviado = AssuntoMock.GerarObjetoInvalido();
         var assuntoValido = ValidationResultMock.GerarObjetoInvalido();
 
-        _validator.Setup(validator => validator.Validate(It.IsAny<Assunto>())).Returns(assuntoValido);
+        _validator.Setup(validator => validator.ValidateAsync(It.IsAny<Assunto>(), CancellationToken.None)).ReturnsAsync(assuntoValido);
 
         var servico = GerarCenario();
 
@@ -64,7 +64,7 @@ public class ServicoCadastroAssuntoTeste
         var assuntoRetornado = AssuntoMock.GerarObjetoNulo();
         var assuntoValido = ValidationResultMock.GerarObjetoValido();
 
-        _validator.Setup(validator => validator.Validate(It.IsAny<Assunto>())).Returns(assuntoValido);
+        _validator.Setup(validator => validator.ValidateAsync(It.IsAny<Assunto>(), CancellationToken.None)).ReturnsAsync(assuntoValido);
 
         _repositorioAssunto.Setup(repositorio => 
             repositorio.CadastrarAsync(It.IsAny<Assunto>())
@@ -88,7 +88,7 @@ public class ServicoCadastroAssuntoTeste
         var assuntoRetornado = assuntoEnviado;
         var assuntoValido = ValidationResultMock.GerarObjetoValido();
 
-        _validator.Setup(validator => validator.Validate(It.IsAny<Assunto>())).Returns(assuntoValido);
+        _validator.Setup(validator => validator.ValidateAsync(It.IsAny<Assunto>(), CancellationToken.None)).ReturnsAsync(assuntoValido);
 
         _repositorioAssunto.Setup(repositorio =>
             repositorio.CadastrarAsync(It.IsAny<Assunto>())
