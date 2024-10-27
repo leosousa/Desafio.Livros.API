@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Livros.TesteUnitario", "src
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Livros.Aplicacao", "src\Livros.Aplicacao\Livros.Aplicacao.csproj", "{8F2F1590-0AAE-41AD-A6B4-688DC3590197}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Livros.Infraestrutura", "src\Livros.Infraestrutura\Livros.Infraestrutura.csproj", "{6E9909ED-FF77-4DD7-88BA-1EADC9632338}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{8F2F1590-0AAE-41AD-A6B4-688DC3590197}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F2F1590-0AAE-41AD-A6B4-688DC3590197}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F2F1590-0AAE-41AD-A6B4-688DC3590197}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E9909ED-FF77-4DD7-88BA-1EADC9632338}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E9909ED-FF77-4DD7-88BA-1EADC9632338}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E9909ED-FF77-4DD7-88BA-1EADC9632338}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E9909ED-FF77-4DD7-88BA-1EADC9632338}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -45,6 +51,7 @@ Global
 		{D0E625AE-01AA-4FAF-A4BD-A67461A84D5A} = {BA62A64A-F872-4177-816E-5B0D8523F673}
 		{58BF528B-7D7B-4767-90A0-A12C5C90FA9D} = {AF9C7369-D7A8-4AA8-87EF-C69A980FA0E7}
 		{8F2F1590-0AAE-41AD-A6B4-688DC3590197} = {7C640574-E0C1-4489-A9F3-E5DC15F4046A}
+		{6E9909ED-FF77-4DD7-88BA-1EADC9632338} = {0613779B-F534-48A8-ABE5-B5B48195C452}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CFEB420F-0594-4F8F-A021-AC946D0339F8}
