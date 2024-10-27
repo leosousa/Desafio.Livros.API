@@ -1,6 +1,8 @@
-﻿namespace Livros.Aplicacao.CasosUso.Assunto.Cadastrar;
+﻿using Flunt.Notifications;
 
-public class AssuntoCadastroCommandResult
+namespace Livros.Aplicacao.CasosUso.Assunto.Cadastrar;
+
+public class AssuntoCadastroCommandResult : Notifiable<Notification>
 {
     public int Id { get; set; }
 }

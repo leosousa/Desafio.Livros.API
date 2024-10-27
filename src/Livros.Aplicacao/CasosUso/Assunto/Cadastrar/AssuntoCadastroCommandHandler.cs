@@ -10,7 +10,7 @@ using OneOf;
 namespace Livros.Aplicacao.CasosUso.Assunto.Cadastrar;
 
 public sealed class AssuntoCadastroCommandHandler : ServicoAplicacao,
-    IRequestHandler<AssuntoCadastroCommand, OneOf<AssuntoCadastroCommandResult, CadastroAssuntoRetorno>>
+    IRequestHandler<AssuntoCadastroCommand, AssuntoCadastroCommandResult>
 {
     private readonly IMapper _mapper;
     private readonly IServicoCadastroAssunto _servicoCadastroAssunto;
@@ -23,24 +23,25 @@ public sealed class AssuntoCadastroCommandHandler : ServicoAplicacao,
         _servicoCadastroAssunto = servicoCadastroAssunto;
     }
 
-    public async Task<OneOf<AssuntoCadastroCommandResult, CadastroAssuntoRetorno>> Handle(AssuntoCadastroCommand request, CancellationToken cancellationToken)
+    public async Task<AssuntoCadastroCommandResult> Handle(AssuntoCadastroCommand request, CancellationToken cancellationToken)
     {
         var assunto = _mapper.Map<Dominio.Entidades.Assunto>(request);
+        AssuntoCadastroCommandResult result = new();
 
         if (assunto is null)
         {
-            this.AddNotification(nameof(AssuntoCadastroCommand), Mensagens.AssuntoNaoInformado);
+            result.AddNotification(nameof(AssuntoCadastroCommand), Mensagens.AssuntoNaoInformado);
 
-            return CadastroAssuntoRetorno.NaoInformado;
+            return result;
         }
 
         var assuntoCadastradoResult = await _servicoCadastroAssunto.CadastrarAsync(assunto, cancellationToken);
 
         if (assuntoCadastradoResult.IsT1)
         {
-            AddNotifications(_servicoCadastroAssunto.Notifications);
+            result.AddNotifications(_servicoCadastroAssunto.Notifications);
 
-            return assuntoCadastradoResult.AsT1;
+            return result;
         }
 
         return _mapper.Map<AssuntoCadastroCommandResult>(assuntoCadastradoResult.AsT0);

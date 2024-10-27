@@ -2,6 +2,7 @@
 using Livros.Aplicacao.CasosUso.Assunto.Cadastrar;
 using Livros.Dominio.Contratos;
 using Livros.Dominio.Entidades;
+using Livros.Dominio.Recursos;
 using Livros.Dominio.Servicos.Assunto.Cadastrar;
 using Livros.TesteUnitario.Mocks;
 using Livros.TesteUnitario.Mocks.Aplicacao.Assunto;
@@ -37,7 +38,9 @@ public class AssuntoCadastroCommandHandlerTeste
         var resultado = await GerarCenario().Handle(assuntoEnviado!, CancellationToken.None);
 
         // Assert
-        Assert.Equal(CadastroAssuntoRetorno.NaoInformado, resultado.Value);
+        Assert.NotNull(resultado);
+        Assert.False(resultado.IsValid);
+        Assert.Contains(resultado.Notifications, notification => notification.Message == Mensagens.AssuntoNaoInformado);
     }
 
     [Fact(DisplayName = "Deve retornar o tipo de retorno e as notificações quando o assunto não for cadastrado")]
@@ -61,8 +64,9 @@ public class AssuntoCadastroCommandHandlerTeste
         var resultado = await servico.Handle(assuntoEnviado!, CancellationToken.None);
 
         // Assert
-        Assert.Equal(CadastroAssuntoRetorno.Invalido, resultado.Value);
-        Assert.NotEmpty(servico.Notifications);
+        Assert.NotNull(resultado);
+        Assert.False(resultado.IsValid);
+        Assert.NotEmpty(resultado.Notifications);
     }
 
     [Fact(DisplayName = "Deve retornar o assunto quando o mesmo for cadastrado com sucesso")]
@@ -88,7 +92,8 @@ public class AssuntoCadastroCommandHandlerTeste
         var resultado = await servico.Handle(assuntoEnviado!, CancellationToken.None);
 
         // Assert
-        Assert.Equal(assuntoCadastrado, resultado.Value);
-        Assert.Empty(servico.Notifications);
+        Assert.NotNull(resultado);
+        Assert.True(resultado.IsValid);
+        Assert.Empty(resultado.Notifications);
     }
 }

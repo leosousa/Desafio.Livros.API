@@ -1,10 +1,8 @@
-﻿using Livros.Dominio.Servicos.Assunto.Cadastrar;
-using MediatR;
-using OneOf;
+﻿using MediatR;
 
 namespace Livros.Aplicacao.CasosUso.Assunto.Cadastrar;
 
-public record AssuntoCadastroCommand : IRequest<OneOf<AssuntoCadastroCommandResult, CadastroAssuntoRetorno>>
+public record AssuntoCadastroCommand : IRequest<AssuntoCadastroCommandResult>
 {
     public string Descricao { get; set; }
 }
