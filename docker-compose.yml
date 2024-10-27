@@ -1,0 +1,35 @@
+version: '3.4'
+
+services:
+  database:
+    image: mcr.microsoft.com/mssql/server:latest
+    environment: 
+        SA_PASSWORD: "@Password123"
+        ACCEPT_EULA: "Y"
+    ports: ["1433:1433"]
+    networks:
+        - api-livros-network
+    volumes:
+        - sqlserverdata:/var/opt/mssql
+
+  livros.api:
+    image: ${DOCKER_REGISTRY-}livrosapi
+    environment:
+        - ASPNETCORE_ENVIRONMENT=Development
+        - ConnectionStrings__DefaultConnection=Server=database;Database=ProdutosDb;User ID=sa;Password=@Password123;TrustServerCertificate=True
+    ports:
+        - "8081:8081"
+    build:
+      context: .
+      dockerfile: src/Livros.API/Dockerfile
+    depends_on:
+        - database
+    networks:
+        - api-livros-network
+    entrypoint: /bin/bash -c "sleep 80 && dotnet Produtos.API.dll"
+
+networks:
+  api-livros-network:
+
+volumes:
+  sqlserverdata:

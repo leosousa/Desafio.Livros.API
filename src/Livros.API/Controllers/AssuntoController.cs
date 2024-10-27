@@ -28,7 +28,7 @@ public class AssuntoController : ApiControllerBase
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
 
-        if (registered.Notifications.Count > 0)
+        if (registered.Notifications.Any())
         {
             return BadRequest(registered.Notifications);
         }
