@@ -28,7 +28,7 @@ public class ServicoCadastroAssunto : ServicoDominio, IServicoCadastroAssunto
             return CadastroAssuntoRetorno.NaoInformado;
         }
 
-        var validationResult = _validator.Validate(assunto);
+        var validationResult = await _validator.ValidateAsync(assunto);
 
         if (!validationResult.IsValid)
         {

@@ -25,6 +25,8 @@ public class AssuntoMock : Faker<Assunto>
 
     public static Assunto GerarObjetoValido()
     {
-        return new AssuntoMock().Generate();
+        return new AssuntoMock()
+            .CustomInstantiator(faker => new Assunto(faker.Random.String(1, 20)))
+            .Generate();
     }
 }
