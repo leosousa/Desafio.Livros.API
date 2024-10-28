@@ -1,4 +1,6 @@
-﻿using Livros.Aplicacao.CasosUso.Assunto.Cadastrar;
+﻿using Livros.Aplicacao.CasosUso.Assunto.BuscarPorId;
+using Livros.Aplicacao.CasosUso.Assunto.Cadastrar;
+using Livros.Dominio.Recursos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -40,5 +42,35 @@ public class AssuntoController : ApiControllerBase
            },
            registered
         );
+    }
+
+    /// <summary>
+    /// Busca um sassunto já cadastrado pelo seu identificador
+    /// </summary>
+    /// <param name="id">Identificador do assunto</param>
+    /// <returns>Assunto encontrado</returns>
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetById(int id)
+    {
+        var result = await _mediator.Send(new AssuntoBuscaPorIdQuery { Id = id });
+
+        if (result is null)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError);
+        }
+
+        if (result.Notifications.Any())
+        {
+            return BadRequest(result);
+        }
+
+        if (result.Data is null)
+        {
+            result.AddNotification("Assunto", Mensagens.AssuntoNaoEncontrado);
+
+            return NotFound(result);
+        }
+
+        return Ok(result);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Livros.Aplicacao.CasosUso.Assunto.BuscarPorId;
 using Livros.Aplicacao.CasosUso.Assunto.Cadastrar;
 using Livros.Dominio.Entidades;
 
@@ -10,5 +11,7 @@ public class AutoMapperProfile : Profile
 	{
         CreateMap<AssuntoCadastroCommand, Assunto>();
         CreateMap<Assunto, AssuntoCadastroCommandResult>();
+
+        CreateMap<Assunto, AssuntoBuscaPorIdQueryResult>();
     }
 }
