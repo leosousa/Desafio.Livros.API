@@ -1,6 +1,8 @@
 ﻿using Livros.Aplicacao.CasosUso.Assunto.BuscarPorId;
 using Livros.Aplicacao.CasosUso.Assunto.Cadastrar;
+using Livros.Aplicacao.CasosUso.Assunto.Editar;
 using Livros.Aplicacao.CasosUso.Assunto.Listar;
+using Livros.Dominio.Enumeracoes;
 using Livros.Dominio.Recursos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -110,4 +112,31 @@ public class AssuntoController : ApiControllerBase
         return Ok(result);
     }
 
+    /// <summary>
+    /// Edita um assunto já cadastrado
+    /// </summary>
+    /// <param name="id" > Id do assunto a ser alterado</param>
+    /// <param name="produto">Assunto a ser alterado</param>
+    /// <returns>Assunto editado</returns>
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Editar(int id, [FromBody] AssuntoEdicaoCommand produto)
+    {
+        if (produto is not null) produto.Id = id;
+
+        var assuntoEditado = await _mediator.Send(produto!);
+
+        if (assuntoEditado is null)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError);
+        }
+
+        return assuntoEditado.ResultadoAcao switch
+        {
+            EResultadoAcaoServico.NaoEncontrado => NotFound(assuntoEditado),
+            EResultadoAcaoServico.ParametrosInvalidos => BadRequest(assuntoEditado),
+            EResultadoAcaoServico.Erro => StatusCode(StatusCodes.Status500InternalServerError),
+            EResultadoAcaoServico.Suceso => Ok(assuntoEditado),
+            _ => throw new NotImplementedException()
+        };
+    }
 }

@@ -1,6 +1,5 @@
 ﻿using Bogus;
 using Livros.Aplicacao.CasosUso.Assunto.Cadastrar;
-using Livros.TesteUnitario.Mocks.Dominio.Entidades;
 
 namespace Livros.TesteUnitario.Mocks.Aplicacao.Assunto;
 
