@@ -80,8 +80,8 @@ public class ServicoCadastroAssuntoTeste
         Assert.Empty(servico.Notifications);
     }
 
-    [Fact(DisplayName = "Deve retornar o produto cadastrado quando cadastro for realizado com sucesso")]
-    public async Task DeveRetornarProdutoCadastrado_QuandoCadastroRealizadoComSucesso()
+    [Fact(DisplayName = "Deve retornar o assunto cadastrado quando cadastro for realizado com sucesso")]
+    public async Task DeveRetornarAssuntoCadastrado_QuandoCadastroRealizadoComSucesso()
     {
         // Arrange
         var assuntoEnviado = AssuntoMock.GerarObjetoValido();
