@@ -1,4 +1,4 @@
-﻿using Flunt.Notifications;
+﻿using Livros.Dominio.Enumeracoes;
 
 namespace Livros.Aplicacao.Base;
 

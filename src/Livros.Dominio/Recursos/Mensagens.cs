@@ -12,5 +12,7 @@ public static class Mensagens
 
     public const string AssuntoNaoEncontrado = "Assunto não encontrado";
 
-    public static string CodigoAssuntoNaoInformado = "Identificador do assunto não informado";
+    public const string CodigoAssuntoNaoInformado = "Identificador do assunto não informado";
+
+    public const string AssuntoNaoEditado = "Assunto não editado";
 }

@@ -17,7 +17,7 @@ public class Assunto : Entidade
 
     public void AlterarDescricao(string descricao)
     {
-        Descricao = Descricao;
+        Descricao = descricao;
     }
 
     #region Constantes

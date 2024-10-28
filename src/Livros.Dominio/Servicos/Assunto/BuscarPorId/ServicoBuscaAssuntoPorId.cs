@@ -5,7 +5,7 @@ using Livros.Dominio.Recursos;
 
 namespace Livros.Dominio.Servicos.Assunto.BuscarPorId;
 
-public class ServicoBuscaAssuntoPorId : Notifiable<Notification>, IServicoBuscaAssuntoPorId
+public class ServicoBuscaAssuntoPorId : ServicoDominio, IServicoBuscaAssuntoPorId
 {
     private readonly IRepositorioAssunto _repositorioAssunto;
 
