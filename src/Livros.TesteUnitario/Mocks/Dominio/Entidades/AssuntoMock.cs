@@ -29,4 +29,16 @@ public class AssuntoMock : Faker<Assunto>
             .CustomInstantiator(faker => new Assunto(faker.Random.String(1, 20)))
             .Generate();
     }
+
+    public static IEnumerable<Assunto> GerarObjetoLista(int quantidade = 10)
+    {
+        var lista = new List<Assunto>();
+
+        for (var index = 0; index < quantidade; index++)
+        {
+            lista.Add(GerarObjetoValido());
+        }
+
+        return lista;
+    }
 }

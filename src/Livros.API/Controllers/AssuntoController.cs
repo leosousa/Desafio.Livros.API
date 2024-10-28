@@ -1,5 +1,6 @@
 ﻿using Livros.Aplicacao.CasosUso.Assunto.BuscarPorId;
 using Livros.Aplicacao.CasosUso.Assunto.Cadastrar;
+using Livros.Aplicacao.CasosUso.Assunto.Listar;
 using Livros.Dominio.Recursos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -73,4 +74,40 @@ public class AssuntoController : ApiControllerBase
 
         return Ok(result);
     }
+
+    /// <summary>
+    /// Busca paginada de assuntos com filtros informados
+    /// </summary>
+    /// <param name="descricao">Descrição do assuntos</param>
+    /// <param name="numeroPagina">Número da página</param>
+    /// <param name="tamanhoPagina">Tamanho da página</param>
+    /// <returns>Lista paginada de assuntos encontrados</returns>
+    [HttpGet]
+    public async Task<IActionResult> Listar(
+        [FromQuery] string? descricao,
+        [FromQuery] int numeroPagina = 1,
+        [FromQuery] int tamanhoPagina = 10)
+    {
+        var filtros = new AssuntoListaPaginadaQuery
+        {
+            Descricao = descricao,
+            NumeroPagina = numeroPagina,
+            TamanhoPagina = tamanhoPagina
+        };
+
+        var result = await _mediator.Send(filtros);
+
+        if (result is null)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError);
+        }
+
+        if (!result.Itens!.Any())
+        {
+            return NotFound(result);
+        }
+
+        return Ok(result);
+    }
+
 }
