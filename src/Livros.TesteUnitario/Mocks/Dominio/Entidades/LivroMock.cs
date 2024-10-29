@@ -24,10 +24,10 @@ public class LivroMock : Faker<Livro>
 
     public static Livro? GerarObjetoNulo() => null;
 
-    public static Livro GerarObjetoValido()
+    public static Livro GerarObjeto()
     {
         return new LivroMock()
-            .CustomInstantiator(faker => 
+            .CustomInstantiator(faker =>
                 new Livro(
                     titulo: faker.Lorem.Random.String(1, Livro.TITULO_MAXIMO_CARACTERES),
                     editora: faker.Lorem.Random.String(1, Livro.EDITORA_MAXIMO_CARACTERES),
@@ -38,5 +38,22 @@ public class LivroMock : Faker<Livro>
                 )
             )
             .Generate();
+    }
+
+    public static Livro GerarObjetoValido()
+    {
+        return GerarObjeto();
+    }
+
+    public static List<Livro> GerarObjetoLista(int quantidade = 10)
+    {
+        var lista = new List<Livro>();
+
+        for (var index = 0; index < quantidade; index++)
+        {
+            lista.Add(GerarObjeto());
+        }
+
+        return lista;
     }
 }
