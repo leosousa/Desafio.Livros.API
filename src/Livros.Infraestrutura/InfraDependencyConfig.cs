@@ -1,4 +1,5 @@
 ﻿using Livros.Dominio.Contratos;
+using Livros.Dominio.Contratos.Repositorios;
 using Livros.Infraestrutura.BancoDados;
 using Livros.Infraestrutura.Repositorios;
 using Microsoft.EntityFrameworkCore;
@@ -16,5 +17,6 @@ public static class InfraDependencyConfig
         );
 
         services.AddScoped<IRepositorioAssunto, RepositorioAssunto>();
+        services.AddScoped<IRepositorioAutor, RepositorioAutor>();
     }
 }
