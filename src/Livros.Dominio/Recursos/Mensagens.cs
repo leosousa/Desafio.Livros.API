@@ -34,4 +34,10 @@ public static class Mensagens
     public const string LivroAnoPublicacaoInvalido = "Ano de publicação inválido";
     public const string LivroAutorECampoObrigatorio = "Autor é campo obrigatório. Selecione pelo menos 1.";
     public const string LivroAssuntoECampoObrigatorio = "Assunto é campo obrigatório. Selecione pelo menos 1.";
+    public const string CodigoLivroInvalido = "Identificador do livro inválido";
+    public const string LivroNaoInformado = "Livro não informado";
+    public const string OcorreuUmErroAoCadastrarLivro = "Ocorreu um erro ao cadastrar o livro";
+    public const string LivroNaoEncontrado = "Livro não encontrado";
+    public const string LivroNaoDeletado = "Livro não deletaado";
+    public const string OcorreuUmErroAoEditarLivro = "Ocorreu um erro ao editar o livro";
 }
