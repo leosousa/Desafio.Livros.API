@@ -14,4 +14,8 @@ public class Autor : Entidade
     /// Nome do autor
     /// </summary>
     public string Nome { get; private set; }
+
+    #region Constantes
+    public const int AUTOR_NOME_MAXIMO_CARACTERES = 40;
+    #endregion
 }
