@@ -24,4 +24,5 @@ public static class Mensagens
     public const string AutorNaoEncontrado = "Autor não encontrado";
     public const string AutorNaoDeletado = "Autor não deletado";
     public const string OcorreuUmErroAoEditarAutor = "Ocorreu um erro ao editar o autor";
+    public const string CodigoAutorNaoInformado = "Código do autor não informado";
 }
