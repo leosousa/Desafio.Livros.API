@@ -12,8 +12,8 @@ public record AssuntoEdicaoCommand : IRequest<Result<AssuntoEdicaoCommandResult>
     [JsonIgnore]
     public int Id { get; set; }
 
-    /// <summary>
-    /// Descrição do produto
+    /// <summary>o
+    /// Descrição do assunto
     /// </summary>
     public string Descricao { get; set; }
 }

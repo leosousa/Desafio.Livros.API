@@ -7,7 +7,7 @@ public class AssuntoDelecaoCommandMock : Faker<AssuntoDelecaoCommand>
 {
     private AssuntoDelecaoCommandMock() : base("pt_BR")
     {
-        RuleFor(produto => produto.Id, faker => faker.Lorem.Random.Int(min: 1));
+        RuleFor(assunto => assunto.Id, faker => faker.Lorem.Random.Int(min: 1));
     }
 
     public static AssuntoDelecaoCommand GerarObjeto()

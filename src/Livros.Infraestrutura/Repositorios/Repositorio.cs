@@ -21,18 +21,18 @@ public abstract class Repositorio<T> : IRepositorio<T> where T : Entidade
         return await _dbSet.FirstOrDefaultAsync(entity => entity.Id == id);
     }
 
-    public virtual async Task<T> CadastrarAsync(T produto)
+    public virtual async Task<T> CadastrarAsync(T entidade)
     {
-        _dbSet.Add(produto);
+        _dbSet.Add(entidade);
 
         await _database.SaveChangesAsync();
 
-        return produto;
+        return entidade;
     }
 
-    public virtual async Task<T> EditarAsync(T produto)
+    public virtual async Task<T> EditarAsync(T entidade)
     {
-        _database.Entry<T>(produto).State = EntityState.Modified;
+        _database.Entry<T>(entidade).State = EntityState.Modified;
 
         var linhasAfetadas = await _database.SaveChangesAsync();
 
@@ -41,7 +41,7 @@ public abstract class Repositorio<T> : IRepositorio<T> where T : Entidade
             return await Task.FromResult<T>(null);
         }
 
-        return await Task.FromResult(produto);
+        return await Task.FromResult(entidade);
     }
 
     public virtual async Task<IEnumerable<T>> ListarAsync()
@@ -65,9 +65,9 @@ public abstract class Repositorio<T> : IRepositorio<T> where T : Entidade
            .CountAsync();
     }
 
-    public virtual async Task<bool> RemoverAsync(T produto)
+    public virtual async Task<bool> RemoverAsync(T entidade)
     {
-        _dbSet.Remove(produto);
+        _dbSet.Remove(entidade);
 
         var affectedRows = await _database.SaveChangesAsync();
 

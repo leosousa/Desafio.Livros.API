@@ -33,18 +33,18 @@ public class ServicoDelecaoAssunto : ServicoDominio, IServicoDelecaoAssunto
             return await Task.FromResult(false);
         }
 
-        var produtoRemovido = await _repositorioAssunto.RemoverAsync(assuntoParaDeletar);
+        var assuntoRemovido = await _repositorioAssunto.RemoverAsync(assuntoParaDeletar);
 
-        if (!produtoRemovido)
+        if (!assuntoRemovido)
         {
             AddResultadoAcao(Enumeracoes.EResultadoAcaoServico.Erro);
             AddNotification(nameof(Entidades.Assunto), Mensagens.AssuntoNaoRDeletado);
 
-            return await Task.FromResult(produtoRemovido);
+            return await Task.FromResult(assuntoRemovido);
         }
 
         AddResultadoAcao(Enumeracoes.EResultadoAcaoServico.Suceso);
 
-        return await Task.FromResult(produtoRemovido);
+        return await Task.FromResult(assuntoRemovido);
     }
 }
