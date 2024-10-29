@@ -30,7 +30,7 @@ public class AutorMock : Faker<Autor>
             .Generate();
     }
 
-    public static IEnumerable<Autor> GerarObjetoLista(int quantidade = 10)
+    public static List<Autor> GerarObjetoLista(int quantidade = 10)
     {
         var lista = new List<Autor>();
 
