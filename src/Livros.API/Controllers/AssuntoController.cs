@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Livros.API.Controllers;
 
+[Route("api/assuntos")]
 public class AssuntoController : ApiControllerBase
 {
     private readonly IMediator _mediator;
