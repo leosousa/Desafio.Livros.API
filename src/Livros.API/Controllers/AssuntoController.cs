@@ -116,14 +116,14 @@ public class AssuntoController : ApiControllerBase
     /// Edita um assunto já cadastrado
     /// </summary>
     /// <param name="id" > Id do assunto a ser alterado</param>
-    /// <param name="produto">Assunto a ser alterado</param>
+    /// <param name="assunto">Assunto a ser alterado</param>
     /// <returns>Assunto editado</returns>
     [HttpPut("{id}")]
-    public async Task<IActionResult> Editar(int id, [FromBody] AssuntoEdicaoCommand produto)
+    public async Task<IActionResult> Editar(int id, [FromBody] AssuntoEdicaoCommand assunto)
     {
-        if (produto is not null) produto.Id = id;
+        if (assunto is not null) assunto.Id = id;
 
-        var assuntoEditado = await _mediator.Send(produto!);
+        var assuntoEditado = await _mediator.Send(assunto!);
 
         if (assuntoEditado is null)
         {

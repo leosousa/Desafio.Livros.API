@@ -5,12 +5,12 @@ namespace Livros.Aplicacao.CasosUso.Assunto.Editar;
 public class AssuntoEdicaoCommandResult
 {
     /// <summary>
-    /// Identificador do produto
+    /// Identificador do assunto
     /// </summary>
     public int Id { get; set; }
 
     /// <summary>
-    /// Descrição do produto
+    /// Descrição do assunto
     /// </summary>
     public string Descricao { get; set; }
 }

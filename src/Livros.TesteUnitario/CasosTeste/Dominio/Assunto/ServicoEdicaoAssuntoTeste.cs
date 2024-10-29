@@ -25,7 +25,7 @@ public class ServicoEdicaoAssuntoTeste
         return new ServicoEdicaoAssunto(_repositorioAssunto.Object, _validator.Object);
     }
 
-    [Fact(DisplayName = "Não deve editar o assunto se o produto não for enviado")]
+    [Fact(DisplayName = "Não deve editar o assunto se o assunto não for enviado")]
     public async Task NaoDeveEditarAssuntoSeOMesmoNaoForEnviado()
     {
         var assuntoParaAlterar = AssuntoMock.GerarObjetoNulo();
@@ -39,7 +39,7 @@ public class ServicoEdicaoAssuntoTeste
         Assert.NotNull(servicoDominio.Notifications);
     }
 
-    [Fact(DisplayName = "Não deve editar o assunto se o produto não for encontrado")]
+    [Fact(DisplayName = "Não deve editar o assunto se o assunto não for encontrado")]
     public async Task NaoDeveEditarAssuntoSeOMesmoNaoForEncontrado()
     {
         var assuntoParaAlterar = AssuntoMock.GerarObjetoValido();
