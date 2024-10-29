@@ -15,6 +15,7 @@ public class AssuntoConfiguracao : IEntityTypeConfiguration<Assunto>
         builder
            .Property(propriedade => propriedade.Descricao)
            .IsRequired()
+           .HasColumnType("varchar")
            .HasMaxLength(Assunto.ASSUNTO_DESCRICAO_MAXIMO_CARACTERES);
     }
 }
