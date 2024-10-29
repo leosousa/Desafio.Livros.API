@@ -1,16 +1,13 @@
 ﻿using AutoMapper;
 using Livros.Aplicacao.Base;
+using Livros.Aplicacao.DTOs;
 using Livros.Dominio.Contratos;
-using Livros.Dominio.Entidades;
-using Livros.Dominio.Recursos;
-using Livros.Dominio.Servicos.Assunto.Cadastrar;
 using MediatR;
-using OneOf;
 
 namespace Livros.Aplicacao.CasosUso.Assunto.Cadastrar;
 
 public sealed class AssuntoCadastroCommandHandler : ServicoAplicacao,
-    IRequestHandler<AssuntoCadastroCommand, AssuntoCadastroCommandResult>
+    IRequestHandler<AssuntoCadastroCommand, Result<AssuntoCadastroCommandResult>>
 {
     private readonly IMapper _mapper;
     private readonly IServicoCadastroAssunto _servicoCadastroAssunto;
@@ -23,27 +20,24 @@ public sealed class AssuntoCadastroCommandHandler : ServicoAplicacao,
         _servicoCadastroAssunto = servicoCadastroAssunto;
     }
 
-    public async Task<AssuntoCadastroCommandResult> Handle(AssuntoCadastroCommand request, CancellationToken cancellationToken)
+    public async Task<Result<AssuntoCadastroCommandResult>> Handle(AssuntoCadastroCommand request, CancellationToken cancellationToken)
     {
+        Result<AssuntoCadastroCommandResult> result = new();
+
         var assunto = _mapper.Map<Dominio.Entidades.Assunto>(request);
-        AssuntoCadastroCommandResult result = new();
 
-        if (assunto is null)
+        var assuntoCadastrado = await _servicoCadastroAssunto.CadastrarAsync(assunto, cancellationToken);
+
+        result.AddResultadoAcao(_servicoCadastroAssunto.ResultadoAcao);
+        result.AddNotifications(_servicoCadastroAssunto.Notifications);
+
+        if (_servicoCadastroAssunto.ResultadoAcao != Dominio.Enumeracoes.EResultadoAcaoServico.Suceso)
         {
-            result.AddNotification(nameof(AssuntoCadastroCommand), Mensagens.AssuntoNaoInformado);
-
-            return result;
+            return await Task.FromResult(result);
         }
 
-        var assuntoCadastradoResult = await _servicoCadastroAssunto.CadastrarAsync(assunto, cancellationToken);
+        result.Data = _mapper.Map<AssuntoCadastroCommandResult>(assuntoCadastrado);
 
-        if (assuntoCadastradoResult.IsT1)
-        {
-            result.AddNotifications(_servicoCadastroAssunto.Notifications);
-
-            return result;
-        }
-
-        return _mapper.Map<AssuntoCadastroCommandResult>(assuntoCadastradoResult.AsT0);
+        return await Task.FromResult(result);
     }
 }

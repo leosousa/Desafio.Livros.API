@@ -106,7 +106,7 @@ public class ServicoEdicaoAssuntoTeste
 
         Assert.Null(result);
         Assert.Equal(EResultadoAcaoServico.Erro, servicoDominio.ResultadoAcao);
-        Assert.Empty(servicoDominio.Notifications);
+        Assert.NotEmpty(servicoDominio.Notifications);
     }
 
     [Fact(DisplayName = "Deve editar o assunto se dados informados estão corretos")]

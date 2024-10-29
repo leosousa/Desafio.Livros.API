@@ -24,27 +24,26 @@ public class AssuntoController : ApiControllerBase
     /// <param name="assunto">Assunto a ser cadastrado</param>
     /// <returns>Id do novo assunto cadastrado</returns>
     [HttpPost]
-    public async Task<IActionResult> Create(AssuntoCadastroCommand assunto)
+    public async Task<IActionResult> Cadastrar(AssuntoCadastroCommand assunto)
     {
-        var registered = await _mediator.Send(assunto);
+        var assuntoCadastrado = await _mediator.Send(assunto);
 
-        if (registered is null)
+        if (assuntoCadastrado is null)
         {
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
 
-        if (registered.Notifications.Any())
+        return assuntoCadastrado.ResultadoAcao switch
         {
-            return BadRequest(registered.Notifications);
-        }
-
-        return CreatedAtAction("GetById",
-           new
-           {
-               id = registered.Id
-           },
-           registered
-        );
+            EResultadoAcaoServico.NaoEncontrado => NotFound(assuntoCadastrado),
+            EResultadoAcaoServico.ParametrosInvalidos => BadRequest(assuntoCadastrado),
+            EResultadoAcaoServico.Erro => StatusCode(StatusCodes.Status500InternalServerError),
+            EResultadoAcaoServico.Suceso => CreatedAtAction("BuscarPorId",
+                new { id = assuntoCadastrado.Data.Id },
+                assuntoCadastrado.Data
+            ),
+            _ => throw new NotImplementedException()
+        };
     }
 
     /// <summary>
@@ -53,7 +52,7 @@ public class AssuntoController : ApiControllerBase
     /// <param name="id">Identificador do assunto</param>
     /// <returns>Assunto encontrado</returns>
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetById(int id)
+    public async Task<IActionResult> BuscarPorId(int id)
     {
         var result = await _mediator.Send(new AssuntoBuscaPorIdQuery { Id = id });
 

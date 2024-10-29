@@ -1,49 +1,55 @@
 ﻿using FluentValidation;
-using Flunt.Notifications;
 using Livros.Dominio.Contratos;
+using Livros.Dominio.Entidades;
 using Livros.Dominio.Recursos;
-using OneOf;
 
 namespace Livros.Dominio.Servicos.Assunto.Cadastrar;
 
 public class ServicoCadastroAssunto : ServicoDominio, IServicoCadastroAssunto
 {
-    private readonly IValidator<Entidades.Assunto> _validator;
     private readonly IRepositorioAssunto _repositorio;
+    private readonly IValidator<Entidades.Assunto> _validator;
 
     public ServicoCadastroAssunto(
-        IValidator<Entidades.Assunto> validator, 
-        IRepositorioAssunto repositorio)
+        IRepositorioAssunto repositorio,
+        IValidator<Entidades.Assunto> validator)
     {
-        _validator = validator;
         _repositorio = repositorio;
+        _validator = validator;
     }
 
-    public async Task<OneOf<Entidades.Assunto, CadastroAssuntoRetorno>> CadastrarAsync(Entidades.Assunto assunto, CancellationToken cancellationToken)
+    public async Task<Entidades.Assunto?> CadastrarAsync(Entidades.Assunto assunto, CancellationToken cancellationToken)
     {
         if (assunto is null)
         {
-            this.AddNotification(nameof(Entidades.Assunto), Mensagens.AssuntoNaoInformado);
+            AddResultadoAcao(Enumeracoes.EResultadoAcaoServico.ParametrosInvalidos);
+            AddNotification(nameof(Entidades.Assunto), Mensagens.AssuntoNaoInformado);
 
-            return CadastroAssuntoRetorno.NaoInformado;
+            return await Task.FromResult<Entidades.Assunto?>(null);
         }
 
         var validationResult = await _validator.ValidateAsync(assunto);
 
         if (!validationResult.IsValid)
         {
+            AddResultadoAcao(Enumeracoes.EResultadoAcaoServico.ParametrosInvalidos);
             AddNotifications(validationResult);
 
-            return CadastroAssuntoRetorno.Invalido;
+            return await Task.FromResult<Entidades.Assunto?>(null);
         }
 
         var assuntoCadastrado = await _repositorio.CadastrarAsync(assunto);
 
         if (assuntoCadastrado is null)
         {
-            return CadastroAssuntoRetorno.Erro;
+            AddResultadoAcao(Enumeracoes.EResultadoAcaoServico.Erro);
+            AddNotification(nameof(Entidades.Assunto), (Mensagens.OcorreuUmErroAoCadastrarAssunto));
+
+            return await Task.FromResult<Entidades.Assunto?>(null);
         }
 
-        return assuntoCadastrado;
+        AddResultadoAcao(Enumeracoes.EResultadoAcaoServico.Suceso);
+
+        return await Task.FromResult(assuntoCadastrado);
     }
 }

@@ -55,7 +55,7 @@ public class ServicoEdicaoAssunto : ServicoDominio, IServicoEdicaoAssunto
         if (assuntoEditado is null)
         {
             AddResultadoAcao(Enumeracoes.EResultadoAcaoServico.Erro);
-            AddNotifications(validationResult);
+            AddNotification(nameof(Entidades.Assunto), (Mensagens.OcorreuUmErroAoEditarAssunto));
 
             return await Task.FromResult<Entidades.Assunto?>(null);
         }
