@@ -18,5 +18,6 @@ public static class InfraDependencyConfig
 
         services.AddScoped<IRepositorioAssunto, RepositorioAssunto>();
         services.AddScoped<IRepositorioAutor, RepositorioAutor>();
+        services.AddScoped<IRepositorioLivro, RepositorioLivro>();
     }
 }
