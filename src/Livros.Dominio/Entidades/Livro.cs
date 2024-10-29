@@ -5,19 +5,20 @@
 /// </summary>
 public class Livro : Entidade
 {
-    public Livro(string titulo, 
-        string editora, 
-        int edicao, 
-        int anoPublicacao, 
-        ICollection<Autor> autores, 
-        ICollection<Assunto> assuntos)
+    protected Livro()
+    {
+        // Requerido pelo EntityFramework em relacionamentos
+    }
+
+    public Livro(string titulo,
+        string editora,
+        int edicao,
+        int anoPublicacao)
     {
         Titulo = titulo;
         Editora = editora;
         Edicao = edicao;
         AnoPublicacao = anoPublicacao;
-        Autores = autores;
-        Assuntos = assuntos;
     }
 
     /// <summary>
@@ -43,11 +44,16 @@ public class Livro : Entidade
     /// <summary>
     /// Autores do livro
     /// </summary>
-    public ICollection<Autor> Autores { get; private set; }
+    public List<Autor> Autores { get; private set; }
 
     /// <summary>
     /// Assuntos em que o livro pode ser categorizado
     /// </summary>
-    public ICollection<Assunto> Assuntos { get; private set; }
+    public List<Assunto> Assuntos { get; private set; }
 
+
+    #region
+    public const int TITULO_MAXIMO_CARACTERES = 40;
+    public const int EDITORA_MAXIMO_CARACTERES = 40;
+    #endregion
 }

@@ -10,6 +10,16 @@ public class Assunto : Entidade
     /// </summary>
     public string Descricao { get; private set; }
 
+    /// <summary>
+    /// Livros relacionados ao assunto
+    /// </summary>
+    public List<Livro> Livros { get; private set; }
+
+    protected Assunto()
+    {
+        // Requerido pelo EntityFramework em relacionamentos
+    }
+
     public Assunto(string descricao)
     {
         Descricao = descricao;
