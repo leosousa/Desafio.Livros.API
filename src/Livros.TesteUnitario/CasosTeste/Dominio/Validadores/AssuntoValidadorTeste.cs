@@ -17,10 +17,11 @@ public class AssuntoValidadorTeste
     }
 
     [Fact(DisplayName = $"Deve retornar {Mensagens.AssuntoECampoObrigatorio} quando a descrição não for enviada")]
-    public async Task DeveRetornarNaoInformado_QuandoAssuntoForNulo()
+    public void DeveRetornarNaoInformado_QuandoAssuntoForNulo()
     {
         // Arrange
-        var assuntoEnviado = new Assunto(descricao: null);
+        string? descricao = null;
+        Assunto assuntoEnviado = new Assunto(descricao!);
 
         // Act
         var resultado = GerarCenario().TestValidate(assuntoEnviado!);
@@ -31,7 +32,7 @@ public class AssuntoValidadorTeste
     }
 
     [Fact(DisplayName = $"Deve retornar mensagem quando a descrição for maior que o tamanho máximo permitido")]
-    public async Task DeveRetornarMensagemMaximaCaracteres_QuandoAssuntoForMaiorQuePermitido()
+    public void DeveRetornarMensagemMaximaCaracteres_QuandoAssuntoForMaiorQuePermitido()
     {
         // Arrange
         var assuntoEnviado = new Assunto(descricao: new Faker().Random.String(Assunto.ASSUNTO_DESCRICAO_MAXIMO_CARACTERES + 1));
