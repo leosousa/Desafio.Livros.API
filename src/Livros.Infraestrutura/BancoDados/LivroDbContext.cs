@@ -8,6 +8,10 @@ public class LivroDbContext : DbContext
 {
     public DbSet<Assunto> Assuntos { get; set; }
 
+    public DbSet<Autor> Autores { get; set; }
+
+    public DbSet<Livro> Livros { get; set; }
+
     public LivroDbContext()
     {
     }
