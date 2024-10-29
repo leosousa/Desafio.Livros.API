@@ -1,5 +1,6 @@
 ﻿using Livros.Aplicacao.CasosUso.Assunto.BuscarPorId;
 using Livros.Aplicacao.CasosUso.Assunto.Cadastrar;
+using Livros.Aplicacao.CasosUso.Assunto.Deletar;
 using Livros.Aplicacao.CasosUso.Assunto.Editar;
 using Livros.Aplicacao.CasosUso.Assunto.Listar;
 using Livros.Dominio.Enumeracoes;
@@ -135,6 +136,31 @@ public class AssuntoController : ApiControllerBase
             EResultadoAcaoServico.ParametrosInvalidos => BadRequest(assuntoEditado),
             EResultadoAcaoServico.Erro => StatusCode(StatusCodes.Status500InternalServerError),
             EResultadoAcaoServico.Suceso => Ok(assuntoEditado),
+            _ => throw new NotImplementedException()
+        };
+    }
+
+    /// <summary>
+    /// Remove um assunto já cadastrado pelo seu identificador
+    /// </summary>
+    /// <param name="id">Identificador do assunto</param>
+    /// <returns>Informação se o assunto foi ou não removido</returns>
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Remover(int id)
+    {
+        var assuntoRemovido = await _mediator.Send(new AssuntoDelecaoCommand { Id = id });
+
+        if (assuntoRemovido is null)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError);
+        }
+
+        return assuntoRemovido.ResultadoAcao switch
+        {
+            EResultadoAcaoServico.NaoEncontrado => NotFound(assuntoRemovido),
+            EResultadoAcaoServico.ParametrosInvalidos => BadRequest(assuntoRemovido),
+            EResultadoAcaoServico.Erro => StatusCode(StatusCodes.Status500InternalServerError),
+            EResultadoAcaoServico.Suceso => NoContent(),
             _ => throw new NotImplementedException()
         };
     }
