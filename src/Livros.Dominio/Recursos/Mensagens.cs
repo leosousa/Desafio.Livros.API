@@ -13,7 +13,7 @@ public static class Mensagens
     public const string AssuntoNaoEditado = "Assunto não editado";
     public const string OcorreuUmErroAoEditarAssunto = "Ocorreu um erro ao editar o assunto";
     public const string OcorreuUmErroAoCadastrarAssunto = "Ocorreu um erro ao cadastrar o assunto";
-    public const string IdAssuntoNaoInformado = "Id do assunto não informado";
+    public const string IdAssuntoNaoInformado = "Identificador do assunto não informado";
     public const string AssuntoNaoDeletado = "Assunto não deletado";
 
     public const string NomeECampoObrigatorio = "Nome do autor é campo obrigatório";
@@ -24,7 +24,7 @@ public static class Mensagens
     public const string AutorNaoEncontrado = "Autor não encontrado";
     public const string AutorNaoDeletado = "Autor não deletado";
     public const string OcorreuUmErroAoEditarAutor = "Ocorreu um erro ao editar o autor";
-    public const string CodigoAutorNaoInformado = "Código do autor não informado";
+    public const string CodigoAutorNaoInformado = "Identificador do autor não informado";
 
     public const string LivroTituloECampoObrigatorio = "Título é campo obrigatório";
     public static string LivroTituloPodeTerAteXCaracteres = $"Título do livro precisa ter no máximo {Livro.TITULO_MAXIMO_CARACTERES.ToString()} caracteres";
@@ -40,4 +40,5 @@ public static class Mensagens
     public const string LivroNaoEncontrado = "Livro não encontrado";
     public const string LivroNaoDeletado = "Livro não deletaado";
     public const string OcorreuUmErroAoEditarLivro = "Ocorreu um erro ao editar o livro";
+    public const string CodigoLivroNaoInformado = "Identificador do livro não informado";
 }
