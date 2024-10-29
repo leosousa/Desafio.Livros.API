@@ -13,12 +13,16 @@ public class Livro : Entidade
     public Livro(string titulo,
         string editora,
         int edicao,
-        int anoPublicacao)
+        int anoPublicacao,
+        List<Autor> autores,
+        List<Assunto> assuntos)
     {
         Titulo = titulo;
         Editora = editora;
         Edicao = edicao;
         AnoPublicacao = anoPublicacao;
+        Autores = autores;
+        Assuntos = assuntos;
     }
 
     /// <summary>
@@ -51,6 +55,45 @@ public class Livro : Entidade
     /// </summary>
     public List<Assunto> Assuntos { get; private set; }
 
+    public void AlterarTitulo(string titulo)
+    {
+        Titulo = titulo;
+    }
+
+    public void AlterarEditora(string editora)
+    {
+        Editora = editora;
+    }
+
+    public void AlterarEdicao(int edicao)
+    {
+        Edicao = edicao;
+    }
+
+    public void AlterarAnoPublicacao(int anoPublicacao)
+    {
+        AnoPublicacao = anoPublicacao;
+    }
+
+    public void AlterarAutores(List<Autor> autores)
+    {
+        Autores = autores;
+    }
+
+    public void AdicionarAutor(Autor autor)
+    {
+        Autores?.Add(autor);
+    }
+
+    public void AlterarAssuntos(List<Assunto> assuntos)
+    {
+        Assuntos = assuntos;
+    }
+
+    public void AdicionarAssunto(Assunto assunto)
+    {
+        Assuntos?.Add(assunto);
+    }
 
     #region
     public const int TITULO_MAXIMO_CARACTERES = 40;

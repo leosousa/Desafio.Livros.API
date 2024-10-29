@@ -25,4 +25,13 @@ public static class Mensagens
     public const string AutorNaoDeletado = "Autor não deletado";
     public const string OcorreuUmErroAoEditarAutor = "Ocorreu um erro ao editar o autor";
     public const string CodigoAutorNaoInformado = "Código do autor não informado";
+
+    public const string LivroTituloECampoObrigatorio = "Título é campo obrigatório";
+    public static string LivroTituloPodeTerAteXCaracteres = $"Título do livro precisa ter no máximo {Livro.TITULO_MAXIMO_CARACTERES.ToString()} caracteres";
+    public const string LivroEditoraECampoObrigatorio = "Editora é campo obrigatório";
+    public static string LivroEditoraPodeTerAteXCaracteres = $"Editora do livro precisa ter no máximo {Livro.EDITORA_MAXIMO_CARACTERES.ToString()} caracteres";
+    public const string LivroEdicaoInvalido = "Edição inválida";
+    public const string LivroAnoPublicacaoInvalido = "Ano de publicação inválido";
+    public const string LivroAutorECampoObrigatorio = "Autor é campo obrigatório. Selecione pelo menos 1.";
+    public const string LivroAssuntoECampoObrigatorio = "Assunto é campo obrigatório. Selecione pelo menos 1.";
 }

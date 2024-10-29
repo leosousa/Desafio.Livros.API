@@ -30,7 +30,7 @@ public class AssuntoMock : Faker<Assunto>
             .Generate();
     }
 
-    public static IEnumerable<Assunto> GerarObjetoLista(int quantidade = 10)
+    public static List<Assunto> GerarObjetoLista(int quantidade = 10)
     {
         var lista = new List<Assunto>();
 
