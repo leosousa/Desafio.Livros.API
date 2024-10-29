@@ -15,4 +15,7 @@ public static class Mensagens
     public const string OcorreuUmErroAoCadastrarAssunto = "Ocorreu um erro ao cadastrar o assunto";
     public const string IdAssuntoNaoInformado = "Id do assunto não informado";
     public const string AssuntoNaoRDeletado = "Assunto não deletado";
+
+    public const string NomeECampoObrigatorio = "Nome do autor é campo obrigatório";
+    public static string NomePodeTerAteXCaracteres = $"Nome do autor precisa ter no máximo {Autor.AUTOR_NOME_MAXIMO_CARACTERES.ToString()} caracteres";
 }
