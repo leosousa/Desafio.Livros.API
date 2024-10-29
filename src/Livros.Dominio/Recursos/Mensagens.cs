@@ -13,4 +13,6 @@ public static class Mensagens
     public const string AssuntoNaoEditado = "Assunto não editado";
     public const string OcorreuUmErroAoEditarAssunto = "Ocorreu um erro ao editar o assunto";
     public const string OcorreuUmErroAoCadastrarAssunto = "Ocorreu um erro ao cadastrar o assunto";
+    public const string IdAssuntoNaoInformado = "Id do assunto não informado";
+    public const string AssuntoNaoRDeletado = "Assunto não deletado";
 }

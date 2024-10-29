@@ -2,7 +2,7 @@
 
 namespace Livros.Aplicacao.CasosUso.Assunto.Cadastrar;
 
-public class AssuntoCadastroCommandResult : Notifiable<Notification>
+public class AssuntoCadastroCommandResult
 {
     public int Id { get; set; }
 }
