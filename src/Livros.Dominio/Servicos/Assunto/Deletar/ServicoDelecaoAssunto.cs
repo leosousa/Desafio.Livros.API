@@ -38,7 +38,7 @@ public class ServicoDelecaoAssunto : ServicoDominio, IServicoDelecaoAssunto
         if (!assuntoRemovido)
         {
             AddResultadoAcao(Enumeracoes.EResultadoAcaoServico.Erro);
-            AddNotification(nameof(Entidades.Assunto), Mensagens.AssuntoNaoRDeletado);
+            AddNotification(nameof(Entidades.Assunto), Mensagens.AssuntoNaoDeletado);
 
             return await Task.FromResult(assuntoRemovido);
         }
