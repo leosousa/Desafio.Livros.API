@@ -14,10 +14,11 @@ public class AutorValidadorTeste
     }
 
     [Fact(DisplayName = $"Deve retornar {Mensagens.NomeECampoObrigatorio} quando o nome não for enviado")]
-    public async Task DeveRetornarNaoInformado_QuandoAutorForNulo()
+    public void DeveRetornarNaoInformado_QuandoAutorForNulo()
     {
         // Arrange
-        var autorEnviado = new Autor(nome: null);
+        string? nome = null;
+        var autorEnviado = new Autor(nome!);
 
         // Act
         var resultado = GerarCenario().TestValidate(autorEnviado!);
@@ -28,7 +29,7 @@ public class AutorValidadorTeste
     }
 
     [Fact(DisplayName = $"Deve retornar mensagem quando o nome for maior que o tamanho máximo permitido")]
-    public async Task DeveRetornarMensagemMaximaCaracteres_QuandoAutorForMaiorQuePermitido()
+    public void DeveRetornarMensagemMaximaCaracteres_QuandoAutorForMaiorQuePermitido()
     {
         // Arrange
         var autorEnviado = new Autor(nome: new Faker().Random.String(Autor.AUTOR_NOME_MAXIMO_CARACTERES + 1));
