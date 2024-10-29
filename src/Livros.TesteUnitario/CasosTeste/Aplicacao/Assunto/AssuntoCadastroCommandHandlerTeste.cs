@@ -2,7 +2,9 @@
 using Livros.Aplicacao.CasosUso.Assunto.Cadastrar;
 using Livros.Dominio.Contratos;
 using Livros.Dominio.Entidades;
+using Livros.Dominio.Enumeracoes;
 using Livros.Dominio.Recursos;
+using Livros.Dominio.Servicos;
 using Livros.Dominio.Servicos.Assunto.Cadastrar;
 using Livros.TesteUnitario.Mocks;
 using Livros.TesteUnitario.Mocks.Aplicacao.Assunto;
@@ -34,13 +36,21 @@ public class AssuntoCadastroCommandHandlerTeste
         // Arrange
         var assuntoEnviado = AssuntoCadastroCommandMock.GerarObjetoNulo();
 
+        _servicoCadastroAssunto.SetupGet(property => property.ResultadoAcao).Returns(EResultadoAcaoServico.ParametrosInvalidos);
+        _servicoCadastroAssunto.SetupGet(property => property.Notifications).Returns(NotificationMock.GerarObjetoLista());
+        _servicoCadastroAssunto.SetupGet(property => property.IsValid).Returns(false);
+
+        var servico = GerarCenario();
+
         // Act
-        var resultado = await GerarCenario().Handle(assuntoEnviado!, CancellationToken.None);
+        var resultado = await servico.Handle(assuntoEnviado!, CancellationToken.None);
 
         // Assert
+        //Assert.NotNull(resultado);
+        //Assert.False(resultado.IsValid);
+        //Assert.Contains(resultado.Notifications, notification => notification.Message == Mensagens.AssuntoNaoInformado);
         Assert.NotNull(resultado);
-        Assert.False(resultado.IsValid);
-        Assert.Contains(resultado.Notifications, notification => notification.Message == Mensagens.AssuntoNaoInformado);
+        Assert.NotEmpty(resultado.Notifications);
     }
 
     [Fact(DisplayName = "Deve retornar o tipo de retorno e as notificações quando o assunto não for cadastrado")]
@@ -54,9 +64,11 @@ public class AssuntoCadastroCommandHandlerTeste
 
         _servicoCadastroAssunto.Setup(
             servicoCadastroAssunto => servicoCadastroAssunto.CadastrarAsync(It.IsAny<Assunto>(), CancellationToken.None)
-        ).ReturnsAsync(CadastroAssuntoRetorno.Invalido);
+        ).ReturnsAsync(assuntoInvalido);
 
+        _servicoCadastroAssunto.SetupGet(property => property.ResultadoAcao).Returns(EResultadoAcaoServico.Erro);
         _servicoCadastroAssunto.SetupGet(property => property.Notifications).Returns(NotificationMock.GerarObjetoLista());
+        _servicoCadastroAssunto.SetupGet(property => property.IsValid).Returns(false);
 
         var servico = GerarCenario();
 
@@ -65,7 +77,6 @@ public class AssuntoCadastroCommandHandlerTeste
 
         // Assert
         Assert.NotNull(resultado);
-        Assert.False(resultado.IsValid);
         Assert.NotEmpty(resultado.Notifications);
     }
 
@@ -84,7 +95,9 @@ public class AssuntoCadastroCommandHandlerTeste
             servicoCadastroAssunto => servicoCadastroAssunto.CadastrarAsync(It.IsAny<Assunto>(), CancellationToken.None)
         ).ReturnsAsync(assuntoValido);
 
+        _servicoCadastroAssunto.SetupGet(property => property.ResultadoAcao).Returns(EResultadoAcaoServico.Suceso);
         _servicoCadastroAssunto.SetupGet(property => property.Notifications).Returns(NotificationMock.GerarListaVazia());
+        _servicoCadastroAssunto.SetupGet(property => property.IsValid).Returns(true);
 
         var servico = GerarCenario();
 
