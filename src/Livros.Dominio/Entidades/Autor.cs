@@ -1,4 +1,5 @@
-﻿namespace Livros.Dominio.Entidades;
+﻿
+namespace Livros.Dominio.Entidades;
 
 /// <summary>
 /// Armazena um autor de livros
@@ -14,6 +15,11 @@ public class Autor : Entidade
     /// Nome do autor
     /// </summary>
     public string Nome { get; private set; }
+
+    public void AlterarNome(string nome)
+    {
+        Nome = nome;
+    }
 
     #region Constantes
     public const int AUTOR_NOME_MAXIMO_CARACTERES = 40;

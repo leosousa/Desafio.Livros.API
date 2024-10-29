@@ -2,5 +2,5 @@
 
 public interface IServicoCadastroAutor : IServico
 {
-    Task<Entidades.Assunto?> CadastrarAsync(Entidades.Assunto assunto, CancellationToken cancellationToken);
+    Task<Entidades.Autor?> CadastrarAsync(Entidades.Autor autor, CancellationToken cancellationToken);
 }
