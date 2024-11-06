@@ -7,10 +7,15 @@ using Livros.Aplicacao.CasosUso.Autor.BuscarPorId;
 using Livros.Aplicacao.CasosUso.Autor.Cadastrar;
 using Livros.Aplicacao.CasosUso.Autor.Editar;
 using Livros.Aplicacao.CasosUso.Autor.Listar;
+using Livros.Aplicacao.CasosUso.Livro.BuscarPorId;
+using Livros.Aplicacao.CasosUso.Livro.Cadastrar;
+using Livros.Aplicacao.CasosUso.Livro.Editar;
+using Livros.Aplicacao.CasosUso.Livro.Listar;
 using Livros.Dominio.DTOs;
 using Livros.Dominio.Entidades;
 using Livros.Dominio.Servicos.Assunto.Listar;
 using Livros.Dominio.Servicos.Autor.Listar;
+using Livros.Dominio.Servicos.Livro.Listar;
 
 namespace Livros.API.Config;
 
@@ -44,5 +49,44 @@ public class AutoMapperProfile : Profile
 
         CreateMap<AutorEdicaoCommand, Autor>();
         CreateMap<Autor, AutorEdicaoCommandResult>();
+
+        // Livro
+        CreateMap<LivroCadastroCommand, Livro>()
+            .ConstructUsing(src => 
+                new Livro(
+                    src.Titulo,
+                    src.Editora,
+                    src.Edicao,
+                    src.AnoPublicacao,
+                    null,
+                    null
+                ))
+           .ForMember(dest => dest.Autores, opt => opt.Ignore()) // Ignora se você não quiser mapear as listas
+           .ForMember(dest => dest.Assuntos, opt => opt.Ignore());
+
+        CreateMap<Livro, LivroCadastroCommandResult>();
+        CreateMap<Assunto, AssuntoResult>();
+        CreateMap<Autor, AutorResult>();
+
+        CreateMap<Livro, LivroBuscaPorIdQueryResult>();
+
+        CreateMap<LivroListaPaginadaQuery, LivroListaFiltro>();
+        CreateMap<ListaPaginadaResult<Livro>, LivroListaPaginadaQueryResult>();
+        CreateMap<Livro, LivroItemResult>();
+
+        CreateMap<LivroEdicaoCommand, Livro>()
+            .ConstructUsing(src =>
+                new Livro(
+                    src.Titulo,
+                    src.Editora,
+                    src.Edicao,
+                    src.AnoPublicacao,
+                    null,
+                    null
+                ))
+           .ForMember(dest => dest.Autores, opt => opt.Ignore()) // Ignora se você não quiser mapear as listas
+           .ForMember(dest => dest.Assuntos, opt => opt.Ignore());
+
+        CreateMap<Livro, LivroEdicaoCommandResult>();
     }
 }

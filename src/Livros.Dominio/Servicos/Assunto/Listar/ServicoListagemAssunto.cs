@@ -54,6 +54,11 @@ public class ServicoListagemAssunto : Notifiable<Notification>, IServicoListagem
 
     private static ExpressionStarter<Entidades.Assunto> AdicionarFiltrosBuscaNaConsulta(AssuntoListaFiltro filtros, ExpressionStarter<Entidades.Assunto> predicado)
     {
+        if (filtros.Ids is not null)
+        {
+            predicado = predicado.And(p => filtros.Ids.Contains(p.Id));
+        }
+
         if (!string.IsNullOrEmpty(filtros.Descricao))
         {
             predicado = predicado.And(p => p.Descricao.Contains(filtros.Descricao));

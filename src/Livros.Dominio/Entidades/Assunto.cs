@@ -13,9 +13,9 @@ public class Assunto : Entidade
     /// <summary>
     /// Livros relacionados ao assunto
     /// </summary>
-    public List<Livro> Livros { get; private set; }
+    public List<Livro> Livros { get; set; }
 
-    protected Assunto()
+    public Assunto()
     {
         // Requerido pelo EntityFramework em relacionamentos
     }

@@ -40,6 +40,11 @@ public class ServicoEdicaoLivro : ServicoDominio, IServicoEdicaoLivro
         }
 
         livroEncontrado.AlterarTitulo(livro.Titulo);
+        livroEncontrado.AlterarEditora(livro.Editora);
+        livroEncontrado.AlterarEdicao(livro.Edicao);
+        livroEncontrado.AlterarAnoPublicacao(livro.AnoPublicacao);
+        livroEncontrado.AlterarAutores(livro.Autores.ToList());
+        livroEncontrado.AlterarAssuntos(livro.Assuntos.ToList());
 
         var validationResult = await _validator.ValidateAsync(livro);
 

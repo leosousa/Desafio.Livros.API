@@ -1,5 +1,6 @@
 ﻿using Livros.Dominio.Contratos;
 using Livros.Dominio.Entidades;
+using Livros.Infraestrutura.BancoDados;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
@@ -7,10 +8,10 @@ namespace Livros.Infraestrutura.Repositorios;
 
 public abstract class Repositorio<T> : IRepositorio<T> where T : Entidade
 {
-    protected DbContext _database;
+    protected LivroDbContext _database;
     protected DbSet<T> _dbSet;
 
-    public Repositorio(DbContext database)
+    public Repositorio(LivroDbContext database)
     {
         _database = database;
         _dbSet = _database.Set<T>();

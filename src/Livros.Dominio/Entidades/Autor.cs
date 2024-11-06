@@ -6,7 +6,7 @@ namespace Livros.Dominio.Entidades;
 /// </summary>
 public class Autor : Entidade
 {
-    protected Autor()
+    public Autor()
     {
         // Requerido pelo EntityFramework em relacionamentos
     }
@@ -24,7 +24,7 @@ public class Autor : Entidade
     /// <summary>
     /// Livros relacionados ao autor
     /// </summary>
-    public List<Livro> Livros { get; private set; }
+    public List<Livro> Livros { get; set; }
 
     public void AlterarNome(string nome)
     {
