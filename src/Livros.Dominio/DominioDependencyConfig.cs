@@ -46,5 +46,7 @@ public static class DominioDependencyConfig
 
         //services.AddValidatorsFromAssembly(Assembly.Load("Livros.Dominio"));
         services.AddValidatorsFromAssemblyContaining<AssuntoValidador>();
+        services.AddValidatorsFromAssemblyContaining<AutorValidador>();
+        services.AddValidatorsFromAssemblyContaining<LivroValidador>();
     }
 }

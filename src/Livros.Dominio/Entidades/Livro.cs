@@ -14,15 +14,15 @@ public class Livro : Entidade
         string editora,
         int edicao,
         int anoPublicacao,
-        List<Autor> autores,
-        List<Assunto> assuntos)
+        List<Autor> autores = null,
+        List<Assunto> assuntos = null)
     {
         Titulo = titulo;
         Editora = editora;
         Edicao = edicao;
         AnoPublicacao = anoPublicacao;
-        Autores = autores;
-        Assuntos = assuntos;
+        Autores = autores ?? new List<Autor>();
+        Assuntos = assuntos ??new List<Assunto>();
     }
 
     /// <summary>
@@ -48,12 +48,12 @@ public class Livro : Entidade
     /// <summary>
     /// Autores do livro
     /// </summary>
-    public List<Autor> Autores { get; private set; }
+    public List<Autor> Autores { get; set; }
 
     /// <summary>
     /// Assuntos em que o livro pode ser categorizado
     /// </summary>
-    public List<Assunto> Assuntos { get; private set; }
+    public List<Assunto> Assuntos { get; set; }
 
     public void AlterarTitulo(string titulo)
     {

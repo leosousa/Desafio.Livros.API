@@ -15,7 +15,22 @@ public class LivroItemResult
     public int Id { get; set; }
 
     /// <summary>
-    /// Descrição do livro
+    /// Título do livro
     /// </summary>
-    public string Descricao { get; set; }
+    public string Titulo { get; set; }
+
+    /// <summary>
+    /// Editora do livro
+    /// </summary>
+    public string Editora { get; set; }
+
+    /// <summary>
+    /// Edição do livro
+    /// </summary>
+    public int Edicao { get; set; }
+
+    /// <summary>
+    /// Ano de publicação do livro
+    /// </summary>
+    public int AnoPublicacao { get; set; }
 }
