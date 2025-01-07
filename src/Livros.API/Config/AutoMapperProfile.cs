@@ -11,6 +11,7 @@ using Livros.Aplicacao.CasosUso.Livro.BuscarPorId;
 using Livros.Aplicacao.CasosUso.Livro.Cadastrar;
 using Livros.Aplicacao.CasosUso.Livro.Editar;
 using Livros.Aplicacao.CasosUso.Livro.Listar;
+using Livros.Aplicacao.CasosUso.ProducaoLiteraria.RelatorioProducaoLiteraria;
 using Livros.Dominio.DTOs;
 using Livros.Dominio.Entidades;
 using Livros.Dominio.Servicos.Assunto.Listar;
@@ -95,5 +96,7 @@ public class AutoMapperProfile : Profile
             .ForMember(dest => dest.Livro.AnoPublicacao, opt => opt.MapFrom(src => src.AnoPublicacao))
             .ForMember(dest => dest.Autor.Nome, opt => opt.MapFrom(src => src.NomeAutor))
             .ForMember(dest => dest.Assuntos, opt => opt.MapFrom(src => string.Join(", ", src.Assuntos)));
+
+        CreateMap<Dominio.ValueObjects.ProducaoLiteraria, RelatorioProducaoLiterariaQueryResult>();
     }
 }
