@@ -1,4 +1,5 @@
-﻿using Livros.Dominio.Entidades;
+﻿using Livros.Dominio.DTOs;
+using Livros.Dominio.Entidades;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -11,6 +12,8 @@ public class LivroDbContext : DbContext
     public DbSet<Autor> Autores { get; set; }
 
     public DbSet<Livro> Livros { get; set; }
+
+    public DbSet<RelatorioProducaoLiterariaItem> RelatorioProducaoLiteraria { get; set; }
 
     public LivroDbContext()
     {

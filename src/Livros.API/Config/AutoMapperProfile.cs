@@ -88,5 +88,12 @@ public class AutoMapperProfile : Profile
            .ForMember(dest => dest.Assuntos, opt => opt.Ignore());
 
         CreateMap<Livro, LivroEdicaoCommandResult>();
+
+        // Produção literária
+        CreateMap<RelatorioProducaoLiterariaItem, Dominio.ValueObjects.ProducaoLiterariaItem>()
+            .ForMember(dest => dest.Livro.Titulo, opt => opt.MapFrom(src => src.TituloLivro))
+            .ForMember(dest => dest.Livro.AnoPublicacao, opt => opt.MapFrom(src => src.AnoPublicacao))
+            .ForMember(dest => dest.Autor.Nome, opt => opt.MapFrom(src => src.NomeAutor))
+            .ForMember(dest => dest.Assuntos, opt => opt.MapFrom(src => string.Join(", ", src.Assuntos)));
     }
 }
