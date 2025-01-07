@@ -41,4 +41,6 @@ public static class Mensagens
     public const string LivroNaoDeletado = "Livro não deletaado";
     public const string OcorreuUmErroAoEditarLivro = "Ocorreu um erro ao editar o livro";
     public const string CodigoLivroNaoInformado = "Identificador do livro não informado";
+
+    public const string RelatorioProducaoLiterariaNaoGerado = "Nenhum dado encontrado ao gerar o relatório de produção literária";
 }
