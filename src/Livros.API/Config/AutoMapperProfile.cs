@@ -92,11 +92,14 @@ public class AutoMapperProfile : Profile
 
         // Produção literária
         CreateMap<RelatorioProducaoLiterariaItem, Dominio.ValueObjects.ProducaoLiterariaItem>()
-            .ForMember(dest => dest.Livro.Titulo, opt => opt.MapFrom(src => src.TituloLivro))
-            .ForMember(dest => dest.Livro.AnoPublicacao, opt => opt.MapFrom(src => src.AnoPublicacao))
-            .ForMember(dest => dest.Autor.Nome, opt => opt.MapFrom(src => src.NomeAutor))
-            .ForMember(dest => dest.Assuntos, opt => opt.MapFrom(src => string.Join(", ", src.Assuntos)));
+            .ForPath(dest => dest.Livro.Titulo, opt => opt.MapFrom(src => src.TituloLivro))
+            .ForPath(dest => dest.Livro.AnoPublicacao, opt => opt.MapFrom(src => src.AnoPublicacao))
+            .ForPath(dest => dest.Autor.Nome, opt => opt.MapFrom(src => src.NomeAutor))
+            .ForMember(dest => dest.Assuntos, opt => opt.MapFrom(src =>
+                src.Assuntos.Split(new[] { ',' }, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries)
+            ));
 
-        CreateMap<Dominio.ValueObjects.ProducaoLiteraria, RelatorioProducaoLiterariaQueryResult>();
+        CreateMap<Dominio.ValueObjects.ProducaoLiteraria, RelatorioProducaoLiterariaQueryResult>()
+            .ForMember(dest => dest.Relatorio, opt => opt.MapFrom(src => src));
     }
 }
