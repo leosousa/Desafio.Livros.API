@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using LinqKit;
 using Livros.Dominio.Contratos.Repositorios;
 using Livros.Dominio.Contratos.Servicos.ProducaoLiteraria;
 using Livros.Dominio.ValueObjects;
@@ -20,9 +21,16 @@ public class ServicoRelatorioProducaoLiteraria : IServicoRelatorioProducaoLitera
     {
         var listaProducaoLiteraria = await _repositorioProducaoLiteraria.ListarProducaoLiteraria();
 
-        var itens = _mapper.Map<List<ProducaoLiterariaItem>>(listaProducaoLiteraria);
+        List<ProducaoLiterariaItem> itens = new();
 
-        ValueObjects.ProducaoLiteraria relatorioProducaoLiteraria = new(itens);
+        listaProducaoLiteraria.ForEach(item =>
+        {
+            itens.Add(_mapper.Map<ProducaoLiterariaItem>(item));
+        });
+
+        ValueObjects.ProducaoLiteraria relatorioProducaoLiteraria = new();
+
+        relatorioProducaoLiteraria.Itens = itens;
 
         return await Task.FromResult(relatorioProducaoLiteraria);
     }
