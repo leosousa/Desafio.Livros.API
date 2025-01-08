@@ -10,21 +10,21 @@ public class LivroLocalVendaConfiguracao : IEntityTypeConfiguration<LivroLocalVe
     {
         builder.ToTable(nameof(LivroLocalVenda));
 
-        builder.HasKey("IdLivro", "IdLocalVenda");
+        builder.HasKey("LivroId", "LocalVendaId");
 
         builder
             .Property(propriedade => propriedade.Valor)
             .IsRequired()
             .HasColumnType("decimal(19,4)");
 
-        builder
-            .HasOne(propriedade => propriedade.Livro)
-            .WithMany()
-            .HasForeignKey(e => e.IdLivro);
+        //builder
+        //    .HasOne(propriedade => propriedade.Livro)
+        //    .WithMany()
+        //    .HasForeignKey(e => e.IdLivro);
 
-        builder
-            .HasOne(propriedade => propriedade.LocalVenda)
-            .WithMany()
-            .HasForeignKey(e => e.IdLocalVenda);
+        //builder
+        //    .HasOne(propriedade => propriedade.LocalVenda)
+        //    .WithMany()
+        //    .HasForeignKey(e => e.IdLocalVenda);
     }
 }

@@ -100,6 +100,11 @@ public class Livro : Entidade
         Assuntos?.Add(assunto);
     }
 
+    public void AlterarPrecoCatalogo(List<LivroLocalVenda> locaisVenda)
+    {
+        LocaisVenda = locaisVenda;
+    }
+
     #region
     public const int TITULO_MAXIMO_CARACTERES = 40;
     public const int EDITORA_MAXIMO_CARACTERES = 40;

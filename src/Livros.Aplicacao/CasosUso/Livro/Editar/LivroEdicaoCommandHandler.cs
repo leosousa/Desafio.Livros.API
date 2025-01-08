@@ -4,11 +4,15 @@ using Livros.Aplicacao.DTOs;
 using Livros.Dominio.Contratos.Servicos.Assunto;
 using Livros.Dominio.Contratos.Servicos.Autor;
 using Livros.Dominio.Contratos.Servicos.Livro;
+using Livros.Dominio.Contratos.Servicos.LocalVenda;
+using Livros.Dominio.Entidades;
 using Livros.Dominio.Enumeracoes;
 using Livros.Dominio.Recursos;
 using Livros.Dominio.Servicos.Assunto.Listar;
 using Livros.Dominio.Servicos.Autor.Listar;
+using Livros.Dominio.Servicos.LocalVenda.Listar;
 using MediatR;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace Livros.Aplicacao.CasosUso.Livro.Editar;
 
@@ -19,6 +23,7 @@ public class LivroEdicaoCommandHandler : ServicoAplicacao,
     private readonly IServicoEdicaoLivro _servicoEdicaoLivro;
     private readonly IServicoListagemAutor _servicoListagemAutores;
     private readonly IServicoListagemAssunto _servicoListagemAssuntos;
+    private readonly IServicoListagemLocalVenda _servicoListagemLocaisVenda;
 
     public LivroEdicaoCommandHandler(
         IMapper mapper,
@@ -72,9 +77,32 @@ public class LivroEdicaoCommandHandler : ServicoAplicacao,
             return await Task.FromResult(result);
         }
 
+        var localisVenda = await _servicoListagemLocaisVenda.ListarAsync(new LocalVendaListaFiltro { Ids = request.LocaisVenda.Select(prop => prop.IdLocalVenda).ToList() });
+
+        if (localisVenda is null || !localisVenda.Itens!.Any())
+        {
+            result.AddResultadoAcao(EResultadoAcaoServico.NaoEncontrado);
+            result.AddNotification(nameof(Dominio.Entidades.LocalVenda), Mensagens.LocalVendaNaoEncontrado);
+
+            return await Task.FromResult(result);
+        }
+
         var livro = _mapper.Map<Dominio.Entidades.Livro>(request);
         livro.AlterarAutores(autores.Itens!.ToList());
         livro.AlterarAssuntos(assuntos.Itens!.ToList());
+
+        var livrosLocaisVenda = new List<LivroLocalVenda>();
+        request.LocaisVenda.ForEach(item =>
+        {
+            livrosLocaisVenda.Add(
+                new LivroLocalVenda { 
+                    LocalVendaId = item.IdLocalVenda, 
+                    Valor = item.Valor 
+                }
+            );
+        });
+
+        livro.AlterarPrecoCatalogo(livrosLocaisVenda);
 
         var livroEditado = await _servicoEdicaoLivro.EditarAsync(livro, cancellationToken);
 
