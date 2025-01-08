@@ -1,5 +1,6 @@
 ﻿using Bogus;
 using Livros.Aplicacao.CasosUso.Livro.Editar;
+using Livros.TesteUnitario.Mocks.Aplicacao.Livro.Editar;
 
 namespace Livros.TesteUnitario.Mocks.Aplicacao.Livro;
 
@@ -20,6 +21,8 @@ public class LivroEdicaoCommandMock : Faker<LivroEdicaoCommand>
         RuleFor(autor => autor.Autores, faker => new List<int> { faker.Lorem.Random.Int(min: 1, max: 100) });
 
         RuleFor(autor => autor.Assuntos, faker => new List<int> { faker.Lorem.Random.Int(min: 1, max: 100) });
+
+        RuleFor(autor => autor.LocaisVenda, LivroEdicaoLocalVendaMock.GerarObjetoLista());
     }
 
     public static LivroEdicaoCommand GerarObjeto()
