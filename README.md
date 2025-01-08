@@ -52,6 +52,8 @@ docker-compose up --build
 
 > :exclamation:
 > Observação: Aguarde até que o banco de dados fique de pé. Ele demora um pouco utilizando a imagem SqlServer.
+> Pode ocorrer do Docker fechar o container da aplicação enquanto o banco demora subir. Caso acontece, apenas
+> reiniciá-lo e aguardar a resposta no prompt da API no ar.
 >
 
 2. Acesse a url localmente
