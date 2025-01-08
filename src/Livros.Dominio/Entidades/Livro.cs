@@ -55,6 +55,11 @@ public class Livro : Entidade
     /// </summary>
     public List<Assunto> Assuntos { get; set; }
 
+    /// <summary>
+    /// Locais de venda em que o livro pode ser comprado
+    /// </summary>
+    public List<LivroLocalVenda> LocaisVenda { get; set; }
+
     public void AlterarTitulo(string titulo)
     {
         Titulo = titulo;
