@@ -5,7 +5,7 @@
 namespace Livros.Infraestrutura.BancoDados.Migrations
 {
     /// <inheritdoc />
-    public partial class AddLocalVendaLivro : Migration
+    public partial class AdicionarEntidadeLivroLocalVenda : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -27,31 +27,36 @@ namespace Livros.Infraestrutura.BancoDados.Migrations
                 name: "LivroLocalVenda",
                 columns: table => new
                 {
-                    IdLivro = table.Column<int>(type: "int", nullable: false),
-                    IdLocalVenda = table.Column<int>(type: "int", nullable: false),
+                    LivroId = table.Column<int>(type: "int", nullable: false),
+                    LocalVendaId = table.Column<int>(type: "int", nullable: false),
                     Valor = table.Column<decimal>(type: "decimal(19,4)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_LivroLocalVenda", x => new { x.IdLivro, x.IdLocalVenda });
+                    table.PrimaryKey("PK_LivroLocalVenda", x => new { x.LivroId, x.LocalVendaId });
                     table.ForeignKey(
-                        name: "FK_LivroLocalVenda_Livro_IdLivro",
-                        column: x => x.IdLivro,
+                        name: "FK_LivroLocalVenda_Livro_LivroId",
+                        column: x => x.LivroId,
                         principalTable: "Livro",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_LivroLocalVenda_LocalVenda_IdLocalVenda",
-                        column: x => x.IdLocalVenda,
+                        name: "FK_LivroLocalVenda_LocalVenda_LocalVendaId",
+                        column: x => x.LocalVendaId,
                         principalTable: "LocalVenda",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_LivroLocalVenda_IdLocalVenda",
+                name: "IX_LivroLocalVenda_LivroId",
                 table: "LivroLocalVenda",
-                column: "IdLocalVenda");
+                column: "LivroId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LivroLocalVenda_LocalVendaId",
+                table: "LivroLocalVenda",
+                column: "LocalVendaId");
         }
 
         /// <inheritdoc />

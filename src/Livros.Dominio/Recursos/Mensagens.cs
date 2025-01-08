@@ -43,4 +43,6 @@ public static class Mensagens
     public const string CodigoLivroNaoInformado = "Identificador do livro não informado";
 
     public const string RelatorioProducaoLiterariaNaoGerado = "Nenhum dado encontrado ao gerar o relatório de produção literária";
+
+    public const string LocalVendaNaoEncontrado = "Local de venda não encontrado";
 }

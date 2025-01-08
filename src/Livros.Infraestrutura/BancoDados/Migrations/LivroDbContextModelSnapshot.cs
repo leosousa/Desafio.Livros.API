@@ -146,12 +146,20 @@ namespace Livros.Infraestrutura.BancoDados.Migrations
                     b.Property<int>("IdLocalVenda")
                         .HasColumnType("int");
 
+                    b.Property<int>("LivroId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LocalVendaId")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Valor")
                         .HasColumnType("decimal(19,4)");
 
                     b.HasKey("IdLivro", "IdLocalVenda");
 
-                    b.HasIndex("IdLocalVenda");
+                    b.HasIndex("LivroId");
+
+                    b.HasIndex("LocalVendaId");
 
                     b.ToTable("LivroLocalVenda", (string)null);
                 });
@@ -207,20 +215,25 @@ namespace Livros.Infraestrutura.BancoDados.Migrations
             modelBuilder.Entity("Livros.Dominio.Entidades.LivroLocalVenda", b =>
                 {
                     b.HasOne("Livros.Dominio.Entidades.Livro", "Livro")
-                        .WithMany()
-                        .HasForeignKey("IdLivro")
+                        .WithMany("LocaisVenda")
+                        .HasForeignKey("LivroId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Livros.Dominio.Entidades.LocalVenda", "LocalVenda")
                         .WithMany()
-                        .HasForeignKey("IdLocalVenda")
+                        .HasForeignKey("LocalVendaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Livro");
 
                     b.Navigation("LocalVenda");
+                });
+
+            modelBuilder.Entity("Livros.Dominio.Entidades.Livro", b =>
+                {
+                    b.Navigation("LocaisVenda");
                 });
 #pragma warning restore 612, 618
         }

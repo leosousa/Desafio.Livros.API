@@ -5,22 +5,22 @@ public class LivroLocalVenda
     /// <summary>
     /// Identificador do livro
     /// </summary>
-    public int IdLivro { get; set; }
+    public int LivroId { get; set; }
 
     /// <summary>
     /// Referência do livro
     /// </summary>
-    public virtual Livro Livro { get; set; }
+    public Livro Livro { get; set; }
 
     /// <summary>
     /// Identificado do local de vena
     /// </summary>
-    public int IdLocalVenda { get; set; }
+    public int LocalVendaId { get; set; }
 
     /// <summary>
     /// Referência do local de venda
     /// </summary>
-    public virtual LocalVenda LocalVenda { get; set; }
+    public LocalVenda LocalVenda { get; set; }
 
     /// <summary>
     /// Valor de venda do livro no local

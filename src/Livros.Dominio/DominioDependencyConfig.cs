@@ -3,6 +3,7 @@ using Livros.Dominio.Contratos;
 using Livros.Dominio.Contratos.Servicos.Assunto;
 using Livros.Dominio.Contratos.Servicos.Autor;
 using Livros.Dominio.Contratos.Servicos.Livro;
+using Livros.Dominio.Contratos.Servicos.LocalVenda;
 using Livros.Dominio.Contratos.Servicos.ProducaoLiteraria;
 using Livros.Dominio.Servicos.Assunto.BuscarPorId;
 using Livros.Dominio.Servicos.Assunto.Cadastrar;
@@ -19,6 +20,7 @@ using Livros.Dominio.Servicos.Livro.Cadastrar;
 using Livros.Dominio.Servicos.Livro.Deletar;
 using Livros.Dominio.Servicos.Livro.Editar;
 using Livros.Dominio.Servicos.Livro.Listar;
+using Livros.Dominio.Servicos.LocalVenda.Listar;
 using Livros.Dominio.Servicos.ProducaoLiteraria.RelatorioProducaoLiteraria;
 using Livros.Dominio.Validadores;
 
@@ -48,6 +50,8 @@ public static class DominioDependencyConfig
 
         services.AddScoped<IServicoRelatorioProducaoLiteraria, ServicoRelatorioProducaoLiteraria>();
 
+        services.AddScoped<IServicoListagemLocalVenda, ServicoListagemLocalVenda>();
+        
         //services.AddValidatorsFromAssembly(Assembly.Load("Livros.Dominio"));
         services.AddValidatorsFromAssemblyContaining<AssuntoValidador>();
         services.AddValidatorsFromAssemblyContaining<AutorValidador>();
