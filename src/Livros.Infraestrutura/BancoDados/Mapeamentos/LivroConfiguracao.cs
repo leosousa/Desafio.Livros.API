@@ -50,5 +50,7 @@ public class LivroConfiguracao : IEntityTypeConfiguration<Livro>
                 livro => livro.HasOne(typeof(Livro)).WithMany().HasForeignKey("LivroId").HasPrincipalKey(nameof(Livro.Id)),
                 join => join.HasKey("LivroId", "AssuntoId")
             );
+
+        builder.Ignore(propriedade => propriedade.LocaisVenda);
     }
 }
