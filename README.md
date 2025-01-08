@@ -61,7 +61,9 @@ docker-compose up --build
 Para rodar localmente, você vai precisar ter instalado o Sql Server Express instalado
 1. Crie um banco de dados com o Sql Server Express localmente
 
-2. Ajuste a string de conexão no arquivo appSetings.json e appSettings.Development.json com o banco criado. Ajuste as variáveis SERVER, DATABASE, USER e PASSWORD conforme sua configuração. Use o exemplo abaixo para ajustar e colar no seu arquivo de configuração
+2. Ajuste a string de conexão no arquivo appSetings.json e appSettings.Development.json com o banco criado. 
+Ajuste as variáveis SERVER, DATABASE, USER e PASSWORD conforme sua configuração. Use o exemplo abaixo para 
+ajustar e colar no seu arquivo de configuração
 ```
   "ConnectionStrings": {
     "DefaultConnection": "Server=SERVER;Database=DATABASE;User ID=USER;Password=PASSWORD;TrustServerCertificate=True"
