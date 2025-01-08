@@ -34,4 +34,16 @@ public record LivroCadastroCommand : IRequest<Result<LivroCadastroCommandResult>
     /// Assuntos do livro
     /// </summary>
     public List<int> Assuntos { get; set; }
+
+    /// <summary>
+    /// Locais de venda do livro com preços do catálogo
+    /// </summary>
+    public List<LivroCadastroLocalVenda> LocaisVenda { get; set; }
+}
+
+public record LivroCadastroLocalVenda
+{
+    public int IdLocalVenda { get; set; }
+
+    public decimal Valor { get; set; }
 }

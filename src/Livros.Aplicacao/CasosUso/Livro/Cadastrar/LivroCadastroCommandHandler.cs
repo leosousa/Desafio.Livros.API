@@ -4,10 +4,13 @@ using Livros.Aplicacao.DTOs;
 using Livros.Dominio.Contratos;
 using Livros.Dominio.Contratos.Servicos.Assunto;
 using Livros.Dominio.Contratos.Servicos.Autor;
+using Livros.Dominio.Contratos.Servicos.LocalVenda;
+using Livros.Dominio.Entidades;
 using Livros.Dominio.Enumeracoes;
 using Livros.Dominio.Recursos;
 using Livros.Dominio.Servicos.Assunto.Listar;
 using Livros.Dominio.Servicos.Autor.Listar;
+using Livros.Dominio.Servicos.LocalVenda.Listar;
 using MediatR;
 
 namespace Livros.Aplicacao.CasosUso.Livro.Cadastrar;
@@ -19,17 +22,20 @@ public sealed class LivroCadastroCommandHandler : ServicoAplicacao,
     private readonly IServicoCadastroLivro _servicoCadastroLivro;
     private readonly IServicoListagemAutor _servicoListagemAutores;
     private readonly IServicoListagemAssunto _servicoListagemAssuntos;
+    private readonly IServicoListagemLocalVenda _servicoListagemLocaisVenda;
 
     public LivroCadastroCommandHandler(
         IMapper mapper,
         IServicoCadastroLivro servicoCadastroLivro,
         IServicoListagemAutor servicoListagemAutores,
-        IServicoListagemAssunto servicoListagemAssuntos)
+        IServicoListagemAssunto servicoListagemAssuntos,
+        IServicoListagemLocalVenda servicoListagemLocaisVenda)
     {
         _mapper = mapper;
         _servicoCadastroLivro = servicoCadastroLivro;
         _servicoListagemAutores = servicoListagemAutores;
         _servicoListagemAssuntos = servicoListagemAssuntos;
+        _servicoListagemLocaisVenda = servicoListagemLocaisVenda;
     }
 
     public async Task<Result<LivroCadastroCommandResult>> Handle(LivroCadastroCommand request, CancellationToken cancellationToken)
@@ -80,9 +86,33 @@ public sealed class LivroCadastroCommandHandler : ServicoAplicacao,
             return await Task.FromResult(result);
         }
 
+        var localisVenda = await _servicoListagemLocaisVenda.ListarAsync(new LocalVendaListaFiltro { Ids = request.LocaisVenda.Select(prop => prop.IdLocalVenda).ToList() });
+
+        if (localisVenda is null || !localisVenda.Itens!.Any())
+        {
+            result.AddResultadoAcao(EResultadoAcaoServico.NaoEncontrado);
+            result.AddNotification(nameof(Dominio.Entidades.LocalVenda), Mensagens.LocalVendaNaoEncontrado);
+
+            return await Task.FromResult(result);
+        }
+
         var livro = _mapper.Map<Dominio.Entidades.Livro>(request);
         livro.AlterarAutores(autores.Itens!.ToList());
         livro.AlterarAssuntos(assuntos.Itens!.ToList());
+
+        var livrosLocaisVenda = new List<LivroLocalVenda>();
+        request.LocaisVenda.ForEach(item =>
+        {
+            livrosLocaisVenda.Add(
+                new LivroLocalVenda
+                {
+                    LocalVendaId = item.IdLocalVenda,
+                    Valor = item.Valor
+                }
+            );
+        });
+
+        livro.AlterarPrecoCatalogo(livrosLocaisVenda);
 
         var livroCadastrado = await _servicoCadastroLivro.CadastrarAsync(livro, cancellationToken);
 

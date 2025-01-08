@@ -16,7 +16,7 @@ public class RepositorioLivro : Repositorio<Livro>, IRepositorioLivro
         return await _database.Livros
             .Include(livroAssunto => livroAssunto.Assuntos)
             .Include(livroAutores => livroAutores.Autores)
-            .Include(livroAutores => livroAutores.LocaisVenda)
+            .Include(livroAutores => livroAutores.LocaisVenda).ThenInclude(livroVenda => livroVenda.LocalVenda)
             .FirstOrDefaultAsync(entity => entity.Id == id);
     }
 }

@@ -29,12 +29,14 @@ public class LivroEdicaoCommandHandler : ServicoAplicacao,
         IMapper mapper,
         IServicoEdicaoLivro servicoEdicaoLivro,
         IServicoListagemAutor servicoListagemAutores,
-        IServicoListagemAssunto servicoListagemAssuntos)
+        IServicoListagemAssunto servicoListagemAssuntos,
+        IServicoListagemLocalVenda servicoListagemLocaisVenda)
     {
         _servicoEdicaoLivro = servicoEdicaoLivro;
         _mapper = mapper;
         _servicoListagemAutores = servicoListagemAutores;
         _servicoListagemAssuntos = servicoListagemAssuntos;
+        _servicoListagemLocaisVenda = servicoListagemLocaisVenda;
     }
 
     public async Task<Result<LivroEdicaoCommandResult>> Handle(LivroEdicaoCommand request, CancellationToken cancellationToken)
