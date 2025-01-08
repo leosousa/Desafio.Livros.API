@@ -8,11 +8,15 @@ Criação de uma API em .Net 8. Desafio proposto como parte de uma avaliação t
 - Sql Server
 - Containeirzação de aplicação com Docker
 - Fluent validation
+- xUnit para testes unitários
+- PdfSharp Core para geração de pdf
 
-# Padrões utilizados
+
+## Padrões utilizados
 - DDD
 - Repository Pattern
 - CQRS Pattern
+- Domain notification
 
 
 ## Arquitetura
