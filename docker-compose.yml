@@ -16,7 +16,7 @@ services:
     image: ${DOCKER_REGISTRY-}livrosapi
     environment:
         - ASPNETCORE_ENVIRONMENT=Development
-        - ConnectionStrings__DefaultConnection=Server=database;Database=ProdutosDb;User ID=sa;Password=@Password123;TrustServerCertificate=True
+        - ConnectionStrings__DefaultConnection=Server=database;Database=LivrosDb;User ID=sa;Password=@Password123;TrustServerCertificate=True
     ports:
         - "8081:8081"
     build:
@@ -26,7 +26,7 @@ services:
         - database
     networks:
         - api-livros-network
-    entrypoint: /bin/bash -c "sleep 80 && dotnet Produtos.API.dll"
+    entrypoint: /bin/bash -c "sleep 2m && dotnet Livros.API.dll"
 
 networks:
   api-livros-network:

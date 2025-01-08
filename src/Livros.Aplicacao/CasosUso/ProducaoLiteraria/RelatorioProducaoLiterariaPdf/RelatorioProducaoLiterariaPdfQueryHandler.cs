@@ -1,8 +1,11 @@
 ﻿
 using Livros.Aplicacao.Base;
+using Livros.Infraestrutura.Resolvers;
 using MediatR;
 using PdfSharpCore.Drawing;
+using PdfSharpCore.Fonts;
 using PdfSharpCore.Pdf;
+using System.Runtime.InteropServices;
 
 namespace Livros.Aplicacao.CasosUso.ProducaoLiteraria.RelatorioProducaoLiterariaPdf;
 
@@ -12,6 +15,10 @@ public class RelatorioProducaoLiterariaPdfQueryHandler : ServicoAplicacao,
     public async Task<RelatorioProducaoLiterariaPdfQueryResult> Handle(RelatorioProducaoLiterariaPdfQuery dadosRelatorio, CancellationToken cancellationToken)
     {
         RelatorioProducaoLiterariaPdfQueryResult relatorio = new();
+
+        // Registrar o FontResolver
+        string caminhoFonte = Path.Combine(Directory.GetCurrentDirectory(), "Recursos", "Fonts");
+        GlobalFontSettings.FontResolver = new CustomFontResolver(caminhoFonte);
 
         // Criação do documento PDF
         PdfDocument document = new PdfDocument();
@@ -23,10 +30,19 @@ public class RelatorioProducaoLiterariaPdfQueryHandler : ServicoAplicacao,
         // Objeto de desenho
         XGraphics gfx = XGraphics.FromPdfPage(page);
 
-        // Definir fonte
-        XFont titleFont = new XFont("Arial", 20, XFontStyle.Bold);
-        XFont headerFont = new XFont("Arial", 12, XFontStyle.Bold);
-        XFont bodyFont = new XFont("Arial", 8, XFontStyle.Regular);
+        Console.WriteLine("***********************************************************");
+        Console.WriteLine("Directory.GetCurrentDirectory(): {0}", Directory.GetCurrentDirectory());
+        Console.WriteLine("***********************************************************");
+
+        Console.WriteLine("***********************************************************");
+        Console.WriteLine("Caminho da fonte: {0}", caminhoFonte);
+        Console.WriteLine("***********************************************************");
+
+        var fontName = "DejaVu Sans";
+
+        XFont titleFont = new XFont(fontName, 20);
+        XFont headerFont = new XFont(fontName, 12);
+        XFont bodyFont = new XFont(fontName, 8);
 
         // Adiciona título
         gfx.DrawString("Relatório de Produção Literária", titleFont, XBrushes.Black, new XPoint(50, 50));
@@ -80,5 +96,44 @@ public class RelatorioProducaoLiterariaPdfQueryHandler : ServicoAplicacao,
         }
 
         return await Task.FromResult(relatorio);
+    }
+
+    private string GetSystemFontPath()
+    {
+        // Caminho para fontes no Linux
+        var linuxFontDirectory = "/usr/share/fonts/truetype/dejavu/";
+        var windowsFontDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Fonts);
+
+        // Adicionar curinga para localizar a fonte
+        string searchPattern = string.Empty;
+        var searchPatternLinux = $"DejaVuSans.ttf";
+        var searchPatternWindows = $"Arial.ttf";
+
+        // Procurar no diretório de fontes do Windows
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        {
+            searchPattern = searchPatternWindows;
+            var fontPath = Directory.GetFiles(windowsFontDirectory, searchPatternWindows).FirstOrDefault();
+            if (!string.IsNullOrEmpty(fontPath))
+            {
+                return fontPath;
+            }
+        }
+
+        // Procurar no diretório de fontes do Linux
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+        {
+            searchPattern = searchPatternLinux;
+            foreach (var subDir in Directory.GetDirectories(linuxFontDirectory))
+            {
+                var fontPath = Directory.GetFiles(subDir, searchPatternLinux).FirstOrDefault();
+                if (!string.IsNullOrEmpty(fontPath))
+                {
+                    return fontPath;
+                }
+            }
+        }
+
+        throw new FileNotFoundException($"Fonte '{searchPattern}' não encontrada.");
     }
 }

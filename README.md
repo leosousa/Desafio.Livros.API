@@ -55,16 +55,16 @@ docker-compose up --build
 >
 
 2. Acesse a url localmente
-[http://localhost:8081/swagger/index.html](http://localhost:8081/swagger/index.html)
+[https://localhost:8081/swagger/index.html](https://localhost:8081/swagger/index.html)
 
 ##### Rodando a aplicação localmente
-1. Para rodar localmente, você vai precisar ter instalado o Sql Server Express instalado
+Para rodar localmente, você vai precisar ter instalado o Sql Server Express instalado
 1. Crie um banco de dados com o Sql Server Express localmente
 
-2. Ajuste a string de conexão no arquivo appSetings.json e appSettings.Development.json com o banco criado
+2. Ajuste a string de conexão no arquivo appSetings.json e appSettings.Development.json com o banco criado. Ajuste as variáveis SERVER, DATABASE, USER e PASSWORD conforme sua configuração. Use o exemplo abaixo para ajustar e colar no seu arquivo de configuração
 ```
   "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost,1433;Database=LivrosDb;User ID=sa;Password=@Password123;TrustServerCertificate=True"
+    "DefaultConnection": "Server=SERVER;Database=DATABASE;User ID=USER;Password=PASSWORD;TrustServerCertificate=True"
   },
 ```
 
