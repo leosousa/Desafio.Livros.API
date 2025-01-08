@@ -78,5 +78,4 @@ dotnet run --project "Livros.API/Livros.API.csproj"
 ```
 
 4. Acesse a url
-http://localhost:7143/swagger/index.html
 [http://localhost:7143/swagger/index.html](http://localhost:7143/swagger/index.html)
