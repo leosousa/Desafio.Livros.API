@@ -9,6 +9,7 @@ using Livros.Dominio.Enumeracoes;
 using Livros.Dominio.Recursos;
 using Livros.Dominio.Servicos.Assunto.Listar;
 using Livros.Dominio.Servicos.Autor.Listar;
+using Livros.Dominio.Servicos.LocalVenda.Listar;
 using Livros.TesteUnitario.Mocks;
 using Livros.TesteUnitario.Mocks.Aplicacao.Livro;
 using Livros.TesteUnitario.Mocks.Dominio.DTOs;
@@ -25,18 +26,24 @@ public class LivroCadastroCommandHandlerTeste
     private readonly Mock<IServicoListagemAssunto> _servicoListagemAssunto;
     private readonly Mock<IServicoListagemLocalVenda> _servicoListagemLocalVenda;
 
-    public LivroCadastroCommandHandlerTeste(Mock<IServicoListagemLocalVenda> servicoListagemLocalVenda)
+    public LivroCadastroCommandHandlerTeste()
     {
         _mapper = new();
         _servicoCadastroLivro = new();
         _servicoListagemAutor = new();
         _servicoListagemAssunto = new();
-        _servicoListagemLocalVenda = servicoListagemLocalVenda;
+        _servicoListagemLocalVenda = new();
     }
 
     private LivroCadastroCommandHandler GerarCenario()
     {
-        return new LivroCadastroCommandHandler(_mapper.Object, _servicoCadastroLivro.Object, _servicoListagemAutor.Object, _servicoListagemAssunto.Object, _servicoListagemLocalVenda.Object);
+        return new LivroCadastroCommandHandler(
+            _mapper.Object, 
+            _servicoCadastroLivro.Object, 
+            _servicoListagemAutor.Object, 
+            _servicoListagemAssunto.Object, 
+            _servicoListagemLocalVenda.Object
+        );
     }
 
     [Fact(DisplayName = "Deve retornar 'Parametros Invalidos' quanto o livro não enviado")]
@@ -221,6 +228,10 @@ public class LivroCadastroCommandHandlerTeste
         _servicoListagemAssunto.Setup(service =>
             service.ListarAsync(It.IsAny<AssuntoListaFiltro>(), It.IsAny<int>(), It.IsAny<int>()))
         .ReturnsAsync(AssuntoListaPaginadaResultMock.GerarObjeto());
+
+        _servicoListagemLocalVenda.Setup(service =>
+            service.ListarAsync(It.IsAny<LocalVendaListaFiltro>(), It.IsAny<int>(), It.IsAny<int>()))
+        .ReturnsAsync(LocalVendaListaPaginadaResultMock.GerarObjeto());
 
         _servicoCadastroLivro.Setup(
             servicoCadastroLivro => servicoCadastroLivro.CadastrarAsync(It.IsAny<Livro>(), CancellationToken.None)

@@ -33,8 +33,6 @@ public class LivroMock : Faker<Livro>
                     editora: faker.Lorem.Random.String(1, Livro.EDITORA_MAXIMO_CARACTERES),
                     edicao: faker.Lorem.Random.Int(min: 1, max: 100),
                     anoPublicacao: faker.Lorem.Random.Int(min: 1, max: DateTime.Now.Year)
-                    //autores: AutorMock.GerarObjetoLista(),
-                    //assuntos: AssuntoMock.GerarObjetoLista()
                 )
             )
             .Generate();

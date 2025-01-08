@@ -1,5 +1,6 @@
 ﻿using Bogus;
 using Livros.Aplicacao.CasosUso.Livro.Cadastrar;
+using Livros.TesteUnitario.Mocks.Aplicacao.Livro.Cadastrar;
 
 namespace Livros.TesteUnitario.Mocks.Aplicacao.Livro;
 
@@ -18,6 +19,8 @@ public class LivroCadastroCommandMock : Faker<LivroCadastroCommand>
         RuleFor(autor => autor.Autores, faker => new List<int> { faker.Lorem.Random.Int(min: 1, max: 100) });
 
         RuleFor(autor => autor.Assuntos, faker => new List<int> { faker.Lorem.Random.Int(min: 1, max: 100) });
+
+        RuleFor(autor => autor.LocaisVenda, LivroCadastroLocalVendaMock.GerarObjetoLista());
     }
 
     public static LivroCadastroCommand? GerarObjetoNulo() => null;

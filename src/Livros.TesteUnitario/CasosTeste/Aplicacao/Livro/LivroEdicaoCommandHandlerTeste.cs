@@ -10,6 +10,7 @@ using Livros.Dominio.Enumeracoes;
 using Livros.Dominio.Recursos;
 using Livros.Dominio.Servicos.Assunto.Listar;
 using Livros.Dominio.Servicos.Autor.Listar;
+using Livros.Dominio.Servicos.LocalVenda.Listar;
 using Livros.TesteUnitario.Mocks;
 using Livros.TesteUnitario.Mocks.Aplicacao.Autor;
 using Livros.TesteUnitario.Mocks.Aplicacao.Livro;
@@ -223,6 +224,10 @@ public class LivroEdicaoCommandHandlerTeste
         _servicoListagemAssunto.Setup(service =>
             service.ListarAsync(It.IsAny<AssuntoListaFiltro>(), It.IsAny<int>(), It.IsAny<int>()))
         .ReturnsAsync(AssuntoListaPaginadaResultMock.GerarObjeto());
+
+        _servicoListagemLocalVenda.Setup(service =>
+            service.ListarAsync(It.IsAny<LocalVendaListaFiltro>(), It.IsAny<int>(), It.IsAny<int>()))
+        .ReturnsAsync(LocalVendaListaPaginadaResultMock.GerarObjeto());
 
         _servicoEdicaoLivro.SetupGet(property => property.ResultadoAcao).Returns(EResultadoAcaoServico.Suceso);
         _servicoEdicaoLivro.SetupGet(property => property.Notifications).Returns(NotificationMock.GerarListaVazia());
