@@ -3,6 +3,7 @@ using Livros.Aplicacao.CasosUso.Livro.Cadastrar;
 using Livros.Dominio.Contratos;
 using Livros.Dominio.Contratos.Servicos.Assunto;
 using Livros.Dominio.Contratos.Servicos.Autor;
+using Livros.Dominio.Contratos.Servicos.LocalVenda;
 using Livros.Dominio.Entidades;
 using Livros.Dominio.Enumeracoes;
 using Livros.Dominio.Recursos;
@@ -22,18 +23,20 @@ public class LivroCadastroCommandHandlerTeste
     private readonly Mock<IServicoCadastroLivro> _servicoCadastroLivro;
     private readonly Mock<IServicoListagemAutor> _servicoListagemAutor;
     private readonly Mock<IServicoListagemAssunto> _servicoListagemAssunto;
+    private readonly Mock<IServicoListagemLocalVenda> _servicoListagemLocalVenda;
 
-    public LivroCadastroCommandHandlerTeste()
+    public LivroCadastroCommandHandlerTeste(Mock<IServicoListagemLocalVenda> servicoListagemLocalVenda)
     {
         _mapper = new();
         _servicoCadastroLivro = new();
         _servicoListagemAutor = new();
         _servicoListagemAssunto = new();
+        _servicoListagemLocalVenda = servicoListagemLocalVenda;
     }
 
     private LivroCadastroCommandHandler GerarCenario()
     {
-        return new LivroCadastroCommandHandler(_mapper.Object, _servicoCadastroLivro.Object, _servicoListagemAutor.Object, _servicoListagemAssunto.Object);
+        return new LivroCadastroCommandHandler(_mapper.Object, _servicoCadastroLivro.Object, _servicoListagemAutor.Object, _servicoListagemAssunto.Object, _servicoListagemLocalVenda.Object);
     }
 
     [Fact(DisplayName = "Deve retornar 'Parametros Invalidos' quanto o livro não enviado")]

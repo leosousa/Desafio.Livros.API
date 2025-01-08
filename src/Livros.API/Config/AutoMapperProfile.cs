@@ -63,11 +63,16 @@ public class AutoMapperProfile : Profile
                     null
                 ))
            .ForMember(dest => dest.Autores, opt => opt.Ignore()) // Ignora se você não quiser mapear as listas
-           .ForMember(dest => dest.Assuntos, opt => opt.Ignore());
+           .ForMember(dest => dest.Assuntos, opt => opt.Ignore())
+           .ForMember(dest => dest.LocaisVenda, opt => opt.Ignore());
 
         CreateMap<Livro, LivroCadastroCommandResult>();
         CreateMap<Assunto, AssuntoResult>();
         CreateMap<Autor, AutorResult>();
+        CreateMap<LivroLocalVenda, LocalVendaResult>()
+            .ForMember(dest => dest.IdLocalVenda, opt => opt.MapFrom(src => src.LocalVenda.Id))
+            .ForMember(dest => dest.LocalVenda, opt => opt.MapFrom(src => src.LocalVenda.Descricao))
+            .ForMember(dest => dest.Preco, opt => opt.MapFrom(src => src.Valor));
 
         CreateMap<Livro, LivroBuscaPorIdQueryResult>();
 
@@ -86,7 +91,8 @@ public class AutoMapperProfile : Profile
                     null
                 ))
            .ForMember(dest => dest.Autores, opt => opt.Ignore()) // Ignora se você não quiser mapear as listas
-           .ForMember(dest => dest.Assuntos, opt => opt.Ignore());
+           .ForMember(dest => dest.Assuntos, opt => opt.Ignore())
+           .ForMember(dest => dest.LocaisVenda, opt => opt.Ignore());
 
         CreateMap<Livro, LivroEdicaoCommandResult>();
 

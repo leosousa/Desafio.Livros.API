@@ -14,6 +14,8 @@ public class LivroBuscaPorIdQueryResult
     public List<AutorResult> Autores { get; set; }
 
     public List<AssuntoResult> Assuntos { get; set; }
+
+    public List<LocalVendaResult> LocaisVenda { get; set; }
 }
 
 public class AutorResult
@@ -26,4 +28,13 @@ public class AssuntoResult
 {
     public int Id { get; set; }
     public string Descricao { get; set; }
+}
+
+public class LocalVendaResult
+{
+    public int IdLocalVenda { get; set; }
+
+    public string LocalVenda { get; set; }
+
+    public decimal Preco { get; set; }
 }

@@ -4,6 +4,7 @@ using Livros.Aplicacao.CasosUso.Livro.Editar;
 using Livros.Dominio.Contratos.Servicos.Assunto;
 using Livros.Dominio.Contratos.Servicos.Autor;
 using Livros.Dominio.Contratos.Servicos.Livro;
+using Livros.Dominio.Contratos.Servicos.LocalVenda;
 using Livros.Dominio.Entidades;
 using Livros.Dominio.Enumeracoes;
 using Livros.Dominio.Recursos;
@@ -24,6 +25,7 @@ public class LivroEdicaoCommandHandlerTeste
     private readonly Mock<IServicoEdicaoLivro> _servicoEdicaoLivro;
     private readonly Mock<IServicoListagemAutor> _servicoListagemAutor;
     private readonly Mock<IServicoListagemAssunto> _servicoListagemAssunto;
+    private readonly Mock<IServicoListagemLocalVenda> _servicoListagemLocalVenda;
 
     public LivroEdicaoCommandHandlerTeste()
     {
@@ -31,6 +33,7 @@ public class LivroEdicaoCommandHandlerTeste
         _servicoEdicaoLivro = new();
         _servicoListagemAutor = new();
         _servicoListagemAssunto = new();
+        _servicoListagemLocalVenda = new();
     }
 
     private LivroEdicaoCommandHandler GerarCenario()
@@ -39,7 +42,8 @@ public class LivroEdicaoCommandHandlerTeste
             _mapper.Object,
             _servicoEdicaoLivro.Object,
             _servicoListagemAutor.Object,
-            _servicoListagemAssunto.Object
+            _servicoListagemAssunto.Object,
+            _servicoListagemLocalVenda.Object
         );
     }
 
