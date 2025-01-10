@@ -13,17 +13,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Infraestrutura", "4 - I
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Teste", "5 - Teste", "{AF9C7369-D7A8-4AA8-87EF-C69A980FA0E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Livros.Dominio", "src\Livros.Dominio\Livros.Dominio.csproj", "{D0E625AE-01AA-4FAF-A4BD-A67461A84D5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Livros.Dominio", "src\Livros.Dominio\Livros.Dominio.csproj", "{D0E625AE-01AA-4FAF-A4BD-A67461A84D5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Livros.TesteUnitario", "src\Livros.TesteUnitario\Livros.TesteUnitario.csproj", "{58BF528B-7D7B-4767-90A0-A12C5C90FA9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Livros.TesteUnitario", "src\Livros.TesteUnitario\Livros.TesteUnitario.csproj", "{58BF528B-7D7B-4767-90A0-A12C5C90FA9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Livros.Aplicacao", "src\Livros.Aplicacao\Livros.Aplicacao.csproj", "{8F2F1590-0AAE-41AD-A6B4-688DC3590197}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Livros.Aplicacao", "src\Livros.Aplicacao\Livros.Aplicacao.csproj", "{8F2F1590-0AAE-41AD-A6B4-688DC3590197}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Livros.Infraestrutura", "src\Livros.Infraestrutura\Livros.Infraestrutura.csproj", "{6E9909ED-FF77-4DD7-88BA-1EADC9632338}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Livros.Infraestrutura", "src\Livros.Infraestrutura\Livros.Infraestrutura.csproj", "{6E9909ED-FF77-4DD7-88BA-1EADC9632338}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Livros.API", "src\Livros.API\Livros.API.csproj", "{34650E7C-9E2B-4269-9B39-4E26B53D5A3E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Livros.API", "src\Livros.API\Livros.API.csproj", "{34650E7C-9E2B-4269-9B39-4E26B53D5A3E}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{83918495-8632-4D4D-A466-9EBF57085461}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "Livros.Web", "src\Livros.Web\Livros.Web.esproj", "{8000C623-5808-418C-AC01-E755B649C89D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +57,12 @@ Global
 		{83918495-8632-4D4D-A466-9EBF57085461}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83918495-8632-4D4D-A466-9EBF57085461}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83918495-8632-4D4D-A466-9EBF57085461}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8000C623-5808-418C-AC01-E755B649C89D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8000C623-5808-418C-AC01-E755B649C89D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8000C623-5808-418C-AC01-E755B649C89D}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{8000C623-5808-418C-AC01-E755B649C89D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8000C623-5808-418C-AC01-E755B649C89D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8000C623-5808-418C-AC01-E755B649C89D}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -65,9 +73,9 @@ Global
 		{8F2F1590-0AAE-41AD-A6B4-688DC3590197} = {7C640574-E0C1-4489-A9F3-E5DC15F4046A}
 		{6E9909ED-FF77-4DD7-88BA-1EADC9632338} = {0613779B-F534-48A8-ABE5-B5B48195C452}
 		{34650E7C-9E2B-4269-9B39-4E26B53D5A3E} = {15BACCA7-6ECA-42D4-88B2-869F281040E9}
+		{8000C623-5808-418C-AC01-E755B649C89D} = {15BACCA7-6ECA-42D4-88B2-869F281040E9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CFEB420F-0594-4F8F-A021-AC946D0339F8}
 	EndGlobalSection
 EndGlobal
-
