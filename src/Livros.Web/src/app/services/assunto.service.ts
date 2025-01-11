@@ -18,12 +18,15 @@ export class AssuntoService {
   //  return this.http.get<AssuntoListagem>(`${this.baseUrl}/assuntos?numeroPagina=1&tamanhoPagina=10`);
   //}
 
-  getAssuntosPaginados(pagina: number, tamanho: number): Observable<AssuntoListagem> {
-    return this.http.get<AssuntoListagem>(`${this.baseUrl}/assuntos`, {
-      params: {
-        numeroPagina: pagina.toString(),
-        tamanhoPagina: tamanho.toString(),
-      },
-    });
+  getAssuntosPaginados(pagina: number, tamanho: number, busca: string = ''): Observable<AssuntoListagem> {
+    const params: any = {
+      pagina: pagina.toString(),
+      tamanho: tamanho.toString(),
+    };
+    if (busca) {
+      params.descricao = busca; // Inclui o parâmetro de busca, se fornecido
+    }
+
+    return this.http.get<AssuntoListagem>(`${this.baseUrl}/assuntos`, { params });
   }
 }

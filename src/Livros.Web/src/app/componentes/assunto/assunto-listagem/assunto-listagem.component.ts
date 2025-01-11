@@ -20,21 +20,9 @@ export class AssuntoListagemComponent implements OnInit {
   isLoading = true;
   errorMessage = '';
 
-  constructor(private assuntoService: AssuntoService) { }
+  termoBusca: string = ''; // Termo de busca para o campo de descrição
 
-  //ngOnInit(): void {
-  //  this.assuntoService.getAssuntos().subscribe({
-  //    next: (data) => {
-  //      this.assuntoListagem = data;
-  //      this.isLoading = false;
-  //    },
-  //    error: (error) => {
-  //      console.error('Erro ao carregar os assuntos:', error);
-  //      this.errorMessage = 'Erro ao carregar os assuntos.';
-  //      this.isLoading = false;
-  //    },
-  //  });
-  //}
+  constructor(private assuntoService: AssuntoService) { }
 
   ngOnInit(): void {
     this.carregarListagem();
@@ -42,10 +30,14 @@ export class AssuntoListagemComponent implements OnInit {
 
   carregarListagem(): void {
     this.assuntoService
-      .getAssuntosPaginados(this.listagem.numeroPagina, this.listagem.tamanhoPagina)
+      .getAssuntosPaginados(
+        this.listagem.numeroPagina,
+        this.listagem.tamanhoPagina,
+        this.termoBusca
+      )
       .subscribe(
         (dados) => {
-          this.listagem = dados; // Atualize os dados da página
+          this.listagem = dados; // Atualiza os dados com o resultado da busca
         },
         (erro) => {
           console.error('Erro ao carregar a listagem:', erro);
@@ -53,10 +45,15 @@ export class AssuntoListagemComponent implements OnInit {
       );
   }
 
+  buscar(): void {
+    this.listagem.numeroPagina = 1; // Reinicie na página 1 para nova busca
+    this.carregarListagem();
+  }
+
   mudarPagina(novaPagina: number): void {
     if (novaPagina >= 1 && novaPagina <= this.listagem.totalPaginas) {
       this.listagem.numeroPagina = novaPagina;
-      this.carregarListagem(); // Recarregar os dados da nova página
+      this.carregarListagem();
     }
   }
 }

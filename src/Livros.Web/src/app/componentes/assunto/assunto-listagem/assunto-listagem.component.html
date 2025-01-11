@@ -1,6 +1,18 @@
 <div class="container mt-4">
   <h2>Listagem de Assuntos</h2>
 
+  <!-- Campo de Busca -->
+  <div class="mb-3">
+    <input type="text"
+           class="form-control"
+           placeholder="Buscar por descrição"
+           [(ngModel)]="termoBusca" />
+    <button class="btn btn-primary mt-2"
+            (click)="buscar()">
+      Buscar
+    </button>
+  </div>
+
   <!-- Tabela de Listagem -->
   <table class="table table-bordered table-striped">
     <thead>
