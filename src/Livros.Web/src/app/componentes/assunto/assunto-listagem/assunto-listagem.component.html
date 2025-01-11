@@ -2,15 +2,19 @@
   <h2>Listagem de Assuntos</h2>
 
   <!-- Campo de Busca -->
-  <div class="mb-3">
-    <input type="text"
-           class="form-control"
-           placeholder="Buscar por descrição"
-           [(ngModel)]="termoBusca" />
-    <button class="btn btn-primary mt-2"
+  <div class="row mb-4 mt-4">
+    <div class="col-11">
+      <input type="text"
+             class="form-control"
+             placeholder="Buscar por descrição"
+             [(ngModel)]="termoBusca" />
+    </div>
+    <div class="col-1 text-end">
+      <button class="btn btn-primary"
             (click)="buscar()">
-      Buscar
-    </button>
+        Buscar
+      </button>
+    </div>
   </div>
 
   <!-- Tabela de Listagem -->

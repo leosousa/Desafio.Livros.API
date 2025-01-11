@@ -20,8 +20,8 @@ export class AssuntoService {
 
   getAssuntosPaginados(pagina: number, tamanho: number, busca: string = ''): Observable<AssuntoListagem> {
     const params: any = {
-      pagina: pagina.toString(),
-      tamanho: tamanho.toString(),
+      numeroPagina: pagina.toString(),
+      tamanhoPagina: tamanho.toString(),
     };
     if (busca) {
       params.descricao = busca; // Inclui o parâmetro de busca, se fornecido
