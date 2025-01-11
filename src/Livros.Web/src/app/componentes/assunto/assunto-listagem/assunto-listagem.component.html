@@ -1,32 +1,41 @@
 <div class="container mt-4">
-  <h1>Listagem de Assuntos</h1>
+  <h2>Listagem de Assuntos</h2>
 
-  <div *ngIf="isLoading" class="text-center">
-    <p>Carregando...</p>
-  </div>
+  <!-- Tabela de Listagem -->
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Descrição</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of listagem.itens">
+        <td>{{ item.id }}</td>
+        <td>{{ item.descricao }}</td>
+      </tr>
+      <tr *ngIf="listagem.itens.length === 0">
+        <td colspan="2" class="text-center">Nenhum dado encontrado</td>
+      </tr>
+    </tbody>
+  </table>
 
-  <div *ngIf="errorMessage" class="alert alert-danger">
-    {{ errorMessage }}
-  </div>
+  <!-- Controles de Paginação -->
+  <div class="pagination justify-content-center">
+    <button class="btn btn-primary mx-1"
+            [disabled]="listagem.numeroPagina === 1"
+            (click)="mudarPagina(listagem.numeroPagina - 1)">
+      Anterior
+    </button>
 
-  <div class="col text-center" *ngIf="!isLoading && assuntoListagem.itens.length > 0">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Descrição</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let assunto of assuntoListagem.itens">
-          <td>{{ assunto.id }}</td>
-          <td>{{ assunto.descricao }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+    <span class="align-self-center mx-2">
+      Página {{ listagem.numeroPagina }} de {{ listagem.totalPaginas }}
+    </span>
 
-  <div *ngIf="!isLoading && assuntoListagem.itens.length === 0" class="text-center">
-    <p>Nenhum assunto encontrado.</p>
+    <button class="btn btn-primary mx-1"
+            [disabled]="listagem.numeroPagina === listagem.totalPaginas"
+            (click)="mudarPagina(listagem.numeroPagina + 1)">
+      Próxima
+    </button>
   </div>
 </div>
