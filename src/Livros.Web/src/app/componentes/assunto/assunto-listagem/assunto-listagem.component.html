@@ -1,0 +1,32 @@
+<div class="container mt-4">
+  <h1>Listagem de Assuntos</h1>
+
+  <div *ngIf="isLoading" class="text-center">
+    <p>Carregando...</p>
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <div class="col text-center" *ngIf="!isLoading && assuntoListagem.itens.length > 0">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Descrição</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let assunto of assuntoListagem.itens">
+          <td>{{ assunto.id }}</td>
+          <td>{{ assunto.descricao }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="!isLoading && assuntoListagem.itens.length === 0" class="text-center">
+    <p>Nenhum assunto encontrado.</p>
+  </div>
+</div>
