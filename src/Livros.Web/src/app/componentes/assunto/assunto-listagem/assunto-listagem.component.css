@@ -6,3 +6,17 @@ button:disabled {
   cursor: not-allowed;
   opacity: 0.5;
 }
+
+.table th {
+  text-align: center;
+  background-color: black;
+  color: white;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+.btn-sm i {
+  font-size: 1rem;
+}

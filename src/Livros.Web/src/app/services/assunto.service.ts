@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AssuntoListagem } from '../models/assunto.model';
+import { Assunto, AssuntoListagem } from '../models/assunto.model';
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +28,13 @@ export class AssuntoService {
     }
 
     return this.http.get<AssuntoListagem>(`${this.baseUrl}/assuntos`, { params });
+  }
+
+  atualizarAssunto(assunto: Assunto): Observable<void> {
+    return this.http.put<void>(`${this.baseUrl}/assuntos/${assunto.id}`, assunto);
+  }
+
+  excluirAssunto(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/assuntos/${id}`);
   }
 }
