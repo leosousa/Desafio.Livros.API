@@ -65,12 +65,12 @@ public class ServicoListagemLivro : Notifiable<Notification>, IServicoListagemLi
             predicado = predicado.And(p => p.Editora.Contains(filtros.Editora));
         }
 
-        if (filtros.Edicao is null)
+        if (filtros.Edicao is not null)
         {
             predicado = predicado.And(p => p.Edicao == filtros.Edicao!);
         }
 
-        if (filtros.AnoPublicacao is null)
+        if (filtros.AnoPublicacao is not null)
         {
             predicado = predicado.And(p => p.AnoPublicacao == filtros.AnoPublicacao!);
         }
