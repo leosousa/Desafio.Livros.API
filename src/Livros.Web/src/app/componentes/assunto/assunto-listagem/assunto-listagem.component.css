@@ -30,3 +30,22 @@ button:disabled {
   .btn-success .bi {
     font-size: 1.25rem; /* Ajuste o tamanho do ícone */
   }
+
+.toast {
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+  .toast.show {
+    opacity: 1;
+  }
+
+  .toast.bg-success {
+    color: #fff;
+    background-color: #198754;
+  }
+
+  .toast.bg-danger {
+    color: #fff;
+    background-color: #dc3545;
+  }

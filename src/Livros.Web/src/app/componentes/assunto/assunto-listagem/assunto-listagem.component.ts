@@ -32,6 +32,11 @@ export class AssuntoListagemComponent implements OnInit {
   idAssuntoParaExcluir: number | null = null;
   private modalExcluir: any;
 
+  toastVisible = false;
+  toastMessage = '';
+  toastType: 'success' | 'error' = 'success';
+  toastTitle = 'Mensagem';
+
   constructor(private assuntoService: AssuntoService) { }
 
   ngOnInit(): void {
@@ -81,8 +86,12 @@ export class AssuntoListagemComponent implements OnInit {
       next: () => {
         this.modalCadastro.hide();
         this.carregarListagem(); // Atualiza a listagem após o cadastro
+        this.mostrarToast('Assunto cadastrado com sucesso!', 'success');
       },
-      error: (erro) => console.error('Erro ao cadastrar assunto', erro),
+      error: (erro) => {
+        console.error('Erro ao cadastrar assunto', erro);
+        this.mostrarToast('Erro ao cadastrar o assunto.', 'error');
+      }
     });
   }
 
@@ -96,8 +105,12 @@ export class AssuntoListagemComponent implements OnInit {
       next: () => {
         this.modalEdicao.hide();
         this.carregarListagem();
+        this.mostrarToast('Assunto editado com sucesso!', 'success');
       },
-      error: (erro) => console.error('Erro ao salvar edição', erro),
+      error: (erro) => {
+        console.error('Erro ao salvar edição', erro);
+        this.mostrarToast('Erro ao editar o assunto.', 'error');
+      }
     });
   }
 
@@ -112,9 +125,29 @@ export class AssuntoListagemComponent implements OnInit {
         next: () => {
           this.modalExcluir.hide();
           this.carregarListagem(); // Atualiza a listagem após a exclusão
+          this.mostrarToast('Assunto excluído com sucesso!', 'success');
         },
-        error: (erro) => console.error('Erro ao excluir assunto', erro),
+        error: (erro) => {
+          console.error('Erro ao excluir assunto', erro);
+          this.mostrarToast('Erro ao excluir o assunto.', 'error');
+        }
       });
     }
+  }
+
+  mostrarToast(message: string, type: 'success' | 'error'): void {
+    this.toastMessage = message;
+    this.toastType = type;
+    this.toastTitle = type === 'success' ? 'Sucesso' : 'Erro';
+    this.toastVisible = true;
+
+    // Esconde o toast automaticamente após 3 segundos
+    setTimeout(() => {
+      this.toastVisible = false;
+    }, 3000);
+  }
+
+  fecharToast(): void {
+    this.toastVisible = false;
   }
 }
