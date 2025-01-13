@@ -37,6 +37,8 @@ export class AssuntoListagemComponent implements OnInit {
   toastType: 'success' | 'error' = 'success';
   toastTitle = 'Mensagem';
 
+  paginas: number[] = [];
+
   constructor(private assuntoService: AssuntoService) { }
 
   ngOnInit(): void {
@@ -57,6 +59,7 @@ export class AssuntoListagemComponent implements OnInit {
       .subscribe(
         (dados) => {
           this.listagem = dados; // Atualiza os dados com o resultado da busca
+          this.atualizarPaginas();
         },
         (erro) => {
           console.error('Erro ao carregar a listagem:', erro);
@@ -69,9 +72,23 @@ export class AssuntoListagemComponent implements OnInit {
     this.carregarListagem();
   }
 
-  mudarPagina(novaPagina: number): void {
-    if (novaPagina >= 1 && novaPagina <= this.listagem.totalPaginas) {
-      this.listagem.numeroPagina = novaPagina;
+  atualizarPaginas(): void {
+    this.paginas = [];
+    for (let i = 1; i <= this.listagem.totalPaginas; i++) {
+      this.paginas.push(i);
+    }
+  }
+
+  //mudarPagina(novaPagina: number): void {
+  //  if (novaPagina >= 1 && novaPagina <= this.listagem.totalPaginas) {
+  //    this.listagem.numeroPagina = novaPagina;
+  //    this.carregarListagem();
+  //  }
+  //}
+
+  mudarPagina(pagina: number): void {
+    if (pagina > 0 && pagina <= this.listagem.totalPaginas) {
+      this.listagem.numeroPagina = pagina;
       this.carregarListagem();
     }
   }
