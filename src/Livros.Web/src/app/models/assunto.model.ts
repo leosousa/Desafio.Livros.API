@@ -3,8 +3,14 @@ export interface Assunto {
   descricao: string;
 }
 
+export interface AssuntoItem {
+  id: number;
+  descricao: string;
+  possuiLivrosAssociados: boolean;
+}
+
 export interface AssuntoListagem {
-  itens: Assunto[];
+  itens: AssuntoItem[];
   numeroPagina: number;
   tamanhoPagina: number;
   totalRegistros: number;

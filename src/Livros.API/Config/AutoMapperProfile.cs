@@ -13,6 +13,7 @@ using Livros.Aplicacao.CasosUso.Livro.Editar;
 using Livros.Aplicacao.CasosUso.Livro.Listar;
 using Livros.Aplicacao.CasosUso.ProducaoLiteraria.RelatorioProducaoLiteraria;
 using Livros.Dominio.DTOs;
+using Livros.Dominio.DTOs.Assunto;
 using Livros.Dominio.Entidades;
 using Livros.Dominio.Servicos.Assunto.Listar;
 using Livros.Dominio.Servicos.Autor.Listar;
@@ -32,7 +33,9 @@ public class AutoMapperProfile : Profile
 
         CreateMap<AssuntoListaPaginadaQuery, AssuntoListaFiltro>();
         CreateMap<ListaPaginadaResult<Assunto>, AssuntoListaPaginadaQueryResult>();
+        CreateMap<ListaPaginadaResult<AssuntoComLivroDto>, AssuntoListaPaginadaQueryResult>();
         CreateMap<Assunto, AssuntoItemResult>();
+        CreateMap<AssuntoComLivroDto, AssuntoItemResult>();
 
         CreateMap<AssuntoEdicaoCommand, Assunto>();
         CreateMap<Assunto, AssuntoEdicaoCommandResult>();

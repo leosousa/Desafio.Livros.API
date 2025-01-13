@@ -3,6 +3,7 @@ using LinqKit;
 using Livros.Dominio.Contratos;
 using Livros.Dominio.Contratos.Servicos.Assunto;
 using Livros.Dominio.DTOs;
+using Livros.Dominio.DTOs.Assunto;
 
 namespace Livros.Dominio.Servicos.Assunto.Listar;
 
@@ -41,6 +42,44 @@ public class ServicoListagemAssunto : Notifiable<Notification>, IServicoListagem
         var totalPaginas = quantidadeProdutos / tamanhoPagina;
 
         var result = new ListaPaginadaResult<Entidades.Assunto>
+        {
+            Itens = assuntos,
+            NumeroPagina = numeroPagina,
+            TamanhoPagina = tamanhoPagina,
+            TotalRegistros = quantidadeProdutos,
+            TotalPaginas = (quantidadeProdutos % tamanhoPagina == 0) ? totalPaginas : totalPaginas + 1
+        };
+
+        return await Task.FromResult(result);
+    }
+
+    public async Task<ListaPaginadaResult<AssuntoComLivroDto>> ListarComLivrosAsync(AssuntoListaFiltro filtros, int numeroPagina = 1, int tamanhoPagina = 10)
+    {
+        var predicado = PredicateBuilder.New<Entidades.Assunto>(true);
+
+        if (filtros is not null)
+        {
+            predicado = AdicionarFiltrosBuscaNaConsulta(filtros, predicado);
+        }
+
+        var quantidadeProdutos = await _repositorioAssunto.CountAsync(predicado);
+
+        // O conceito de paginação para o negócio vai da página 1 até a página N
+        if (numeroPagina <= 0)
+        {
+            // Com isso, a página informada menor ou igual a 0 setamos para 1
+            numeroPagina = 1;
+        }
+
+        // Ao enviar para o repositório, trabalhamos com o conceito de página 0 até N,
+        // para sabermos quantos registros pular internamente na busca, por isso enviamos
+        // numeroPagina - 1
+        //var assuntos = await _repositorioAssunto.ListarAsync(predicado, numeroPagina - 1, tamanhoPagina, e => e.Descricao);
+        var assuntos = await _repositorioAssunto.ListarComLivrosAssociadosAsync(predicado, numeroPagina - 1, tamanhoPagina, e => e.Descricao);
+
+        var totalPaginas = quantidadeProdutos / tamanhoPagina;
+
+        var result = new ListaPaginadaResult<AssuntoComLivroDto>
         {
             Itens = assuntos,
             NumeroPagina = numeroPagina,

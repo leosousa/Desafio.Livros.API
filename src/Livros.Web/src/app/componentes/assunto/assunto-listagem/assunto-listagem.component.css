@@ -60,3 +60,39 @@ button:disabled {
   .page-link i {
     font-size: 1rem; /* Aumenta o tamanho do ícone */
   }
+
+.tooltip-container {
+  position: relative;
+  display: inline-block;
+}
+
+  .tooltip-container .tooltip-text {
+    font-size: 0.75rem;
+    visibility: hidden;
+    width: 200px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 5px;
+    border-radius: 5px;
+    /* Posicionamento */
+    position: absolute;
+    bottom: 125%; /* Ajuste para posicionar acima do botão */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    /* Transição para suavizar */
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .tooltip-container:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+  }
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  border: none;
+}

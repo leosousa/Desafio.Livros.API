@@ -18,7 +18,7 @@
 </div>
 
 <div class="container mt-4">
-  <h2>Listagem de Assuntos</h2>
+  <h2>Assuntos</h2>
 
   <!-- Campo de Busca -->
   <div class="row mb-4 mt-4">
@@ -63,16 +63,39 @@
                   title="Editar">
             <i class="bi bi-pencil-fill"></i>
           </button>
-          <button class="btn icon-button text-danger"
-                  (click)="abrirModalExcluir(item.id)"
-                  title="Excluir">
+          <!--<button class="btn icon-button text-danger"
+          (click)="abrirModalExcluir(item.id)"
+          title="Excluir">
             <i class="bi bi-trash-fill"></i>
-          </button>
+          </button>-->
+                  <!--<button [disabled]="item.possuiLivrosAssociados"
+                  matTooltip="{{ item.possuiLivrosAssociados ? 'Não pode ser excluído porque tem livros associados.' : '' }}"
+                  (click)="excluir(item.id)">
+            Excluir
+          </button>-->
+                  <!--<button class="btn icon-button text-danger"
+                  [disabled]="item.possuiLivrosAssociados"
+                  (click)="abrirModalExcluir(item.id)"
+                  matTooltip="{{ item.possuiLivrosAssociados ? 'Não pode ser excluído porque tem livros associados.' : '' }}"
+                  title="Excluir">
+            <i class="bi bi-trash-fill"></i>-->
+          <!--</button>-->
+          <div class="tooltip-container">
+            <button [disabled]="item.possuiLivrosAssociados"
+                  class="btn icon-button text-danger"
+                  (click)="abrirModalExcluir(item.id)" title="Excluir">
+              <i class="bi bi-trash-fill"></i>
+            </button>
+            <span class="tooltip-text"
+                  *ngIf="item.possuiLivrosAssociados">
+              Não pode ser excluído porque tem livros associados.
+            </span>
+          </div>  
         </td>
       </tr>
-      <tr *ngIf="listagem.itens.length === 0">
-        <td colspan="3" class="text-center">Nenhum dado encontrado</td>
-      </tr>
+<tr *ngIf="listagem.itens.length === 0">
+  <td colspan="3" class="text-center">Nenhum dado encontrado</td>
+</tr>
     </tbody>
   </table>
 
@@ -103,78 +126,78 @@
   </nav>
 </div>
 
-  <!-- Modal de Cadastro -->
-  <div class="modal fade" id="modalCadastro" tabindex="-1" aria-labelledby="modalCadastroLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modalCadastroLabel">Cadastrar Assunto</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="mb-3">
-              <label for="descricaoCadastro" class="form-label">Descrição</label>
-              <input type="text"
-                     id="descricaoCadastro"
-                     class="form-control"
-                     [(ngModel)]="novoAssunto.descricao"
-                     name="descricaoCadastro" />
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" (click)="salvarCadastro()">Salvar</button>
-        </div>
+<!-- Modal de Cadastro -->
+<div class="modal fade" id="modalCadastro" tabindex="-1" aria-labelledby="modalCadastroLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalCadastroLabel">Cadastrar Assunto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="descricaoCadastro" class="form-label">Descrição</label>
+            <input type="text"
+                   id="descricaoCadastro"
+                   class="form-control"
+                   [(ngModel)]="novoAssunto.descricao"
+                   name="descricaoCadastro" />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="salvarCadastro()">Salvar</button>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- Modal de Edição -->
-  <div class="modal fade" id="modalEdicao" tabindex="-1" aria-labelledby="modalEdicaoLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modalEdicaoLabel">Editar Assunto</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="mb-3">
-              <label for="descricao" class="form-label">Descrição</label>
-              <input type="text"
-                     id="descricao"
-                     class="form-control"
-                     [(ngModel)]="assuntoEdicao.descricao"
-                     name="descricao" />
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" (click)="salvarEdicao()">Salvar</button>
-        </div>
+<!-- Modal de Edição -->
+<div class="modal fade" id="modalEdicao" tabindex="-1" aria-labelledby="modalEdicaoLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalEdicaoLabel">Editar Assunto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="descricao" class="form-label">Descrição</label>
+            <input type="text"
+                   id="descricao"
+                   class="form-control"
+                   [(ngModel)]="assuntoEdicao.descricao"
+                   name="descricao" />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="salvarEdicao()">Salvar</button>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- Modal de Confirmação de Exclusão -->
-  <div class="modal fade" id="modalExcluir" tabindex="-1" aria-labelledby="modalExcluirLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modalExcluirLabel">Confirmar Exclusão</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          Tem certeza que deseja excluir este assunto?
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-danger" (click)="confirmarExclusao()">Sim, excluir</button>
-        </div>
+<!-- Modal de Confirmação de Exclusão -->
+<div class="modal fade" id="modalExcluir" tabindex="-1" aria-labelledby="modalExcluirLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalExcluirLabel">Confirmar Exclusão</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Tem certeza que deseja excluir este assunto?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-danger" (click)="confirmarExclusao()">Sim, excluir</button>
       </div>
     </div>
   </div>
+</div>
 </div>

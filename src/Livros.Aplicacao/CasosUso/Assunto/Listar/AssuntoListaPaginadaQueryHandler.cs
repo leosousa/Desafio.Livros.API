@@ -2,9 +2,9 @@
 using Flunt.Notifications;
 using Livros.Dominio.Contratos.Servicos.Assunto;
 using Livros.Dominio.DTOs;
+using Livros.Dominio.DTOs.Assunto;
 using Livros.Dominio.Servicos.Assunto.Listar;
 using MediatR;
-using AssuntoEntidade = Livros.Dominio.Entidades.Assunto;
 
 namespace Livros.Aplicacao.CasosUso.Assunto.Listar;
 
@@ -24,15 +24,15 @@ public class AssuntoListaPaginadaQueryHandler : Notifiable<Notification>,
     {
         var filtros = _mapper.Map<AssuntoListaFiltro>(request);
 
-        ListaPaginadaResult<AssuntoEntidade> assuntos = null;
+        ListaPaginadaResult<AssuntoComLivroDto> assuntos = null;
 
         if (filtros is not null)
         {
-            assuntos = await _servicoListagemAssunto.ListarAsync(filtros, request.NumeroPagina, request.TamanhoPagina);
+            assuntos = await _servicoListagemAssunto.ListarComLivrosAsync(filtros, request.NumeroPagina, request.TamanhoPagina);
         }
         else
         {
-            assuntos = await _servicoListagemAssunto.ListarAsync(filtros!);
+            assuntos = await _servicoListagemAssunto.ListarComLivrosAsync(filtros!);
         }
 
 

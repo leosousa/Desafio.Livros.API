@@ -18,4 +18,9 @@ public class AssuntoItemResult
     /// Descrição do assunto
     /// </summary>
     public string Descricao { get; set; }
+
+    /// <summary>
+    /// Quantidade de livros associados
+    /// </summary>
+    public bool PossuiLivrosAssociados { get; set; }
 }

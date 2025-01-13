@@ -1,7 +1,6 @@
 ﻿using Bogus;
 using Livros.Dominio.DTOs;
 using Livros.Dominio.Entidades;
-using Livros.TesteUnitario.Mocks.Dominio.Entidades;
 
 namespace Livros.TesteUnitario.Mocks.Dominio.DTOs;
 
@@ -16,8 +15,6 @@ public class AssuntoListaPaginadaResultMock : Faker<ListaPaginadaResult<Assunto>
         RuleFor(assunto => assunto.TotalPaginas, faker => faker.Random.Int(min: 1));
 
         RuleFor(assunto => assunto.TotalRegistros, faker => faker.Random.Int(min: 1));
-
-        RuleFor(assunto => assunto.Itens, AssuntoMock.GerarObjetoLista());
     }
 
     public static ListaPaginadaResult<Assunto> GerarObjeto()

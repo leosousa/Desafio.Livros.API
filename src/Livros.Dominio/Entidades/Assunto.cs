@@ -13,7 +13,7 @@ public class Assunto : Entidade
     /// <summary>
     /// Livros relacionados ao assunto
     /// </summary>
-    public List<Livro> Livros { get; set; }
+    public virtual List<Livro> Livros { get; set; }
 
     public Assunto()
     {

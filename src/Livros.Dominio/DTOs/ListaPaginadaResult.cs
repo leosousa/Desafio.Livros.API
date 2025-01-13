@@ -2,7 +2,7 @@
 
 namespace Livros.Dominio.DTOs;
 
-public class ListaPaginadaResult<T> where T : Entidade
+public class ListaPaginadaResult<T> where T : class
 {
     public IEnumerable<T>? Itens { get; init; }
 
