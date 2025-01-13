@@ -10,7 +10,6 @@ declare var bootstrap: any; // Para manipular o modal usando Bootstrap JS
   styleUrl: './assunto-listagem.component.css'
 })
 export class AssuntoListagemComponent implements OnInit {
-  //assuntos: Assunto[] = [];
   listagem: AssuntoListagem = {
     itens: [], // Inicialize como um array vazio
     numeroPagina: 1, // Página inicial
@@ -24,15 +23,23 @@ export class AssuntoListagemComponent implements OnInit {
 
   termoBusca: string = ''; // Termo de busca para o campo de descrição
 
+  novoAssunto: Assunto = { id: 0, descricao: '' };
   assuntoEdicao: Assunto = { id: 0, descricao: '' };
+
+  private modalCadastro: any;
   private modalEdicao: any;
+
+  idAssuntoParaExcluir: number | null = null;
+  private modalExcluir: any;
 
   constructor(private assuntoService: AssuntoService) { }
 
   ngOnInit(): void {
     this.carregarListagem();
 
+    this.modalCadastro = new bootstrap.Modal(document.getElementById('modalCadastro'));
     this.modalEdicao = new bootstrap.Modal(document.getElementById('modalEdicao'));
+    this.modalExcluir = new bootstrap.Modal(document.getElementById('modalExcluir'));
   }
 
   carregarListagem(): void {
@@ -64,10 +71,20 @@ export class AssuntoListagemComponent implements OnInit {
     }
   }
 
-  //editar(id: number): void {
-  //  console.log(`Editar assunto com ID: ${id}`);
-  //  // Lógica de edição aqui
-  //}
+  abrirModalCadastro(): void {
+    this.novoAssunto = { id: 0, descricao: '' }; // Inicializa o objeto
+    this.modalCadastro.show();
+  }
+
+  salvarCadastro(): void {
+    this.assuntoService.cadastrarAssunto(this.novoAssunto).subscribe({
+      next: () => {
+        this.modalCadastro.hide();
+        this.carregarListagem(); // Atualiza a listagem após o cadastro
+      },
+      error: (erro) => console.error('Erro ao cadastrar assunto', erro),
+    });
+  }
 
   abrirModalEditar(assunto: Assunto): void {
     this.assuntoEdicao = { ...assunto }; // Copia os dados para evitar alterações diretas
@@ -84,11 +101,20 @@ export class AssuntoListagemComponent implements OnInit {
     });
   }
 
-  excluir(id: number): void {
-    if (confirm(`Tem certeza que deseja excluir o assunto com ID: ${id}?`)) {
-      console.log(`Excluir assunto com ID: ${id}`);
-      // Lógica de exclusão aqui
-      this.carregarListagem(); // Atualiza a listagem após excluir
+  abrirModalExcluir(id: number): void {
+    this.idAssuntoParaExcluir = id;
+    this.modalExcluir.show();
+  }
+
+  confirmarExclusao(): void {
+    if (this.idAssuntoParaExcluir !== null) {
+      this.assuntoService.excluirAssunto(this.idAssuntoParaExcluir).subscribe({
+        next: () => {
+          this.modalExcluir.hide();
+          this.carregarListagem(); // Atualiza a listagem após a exclusão
+        },
+        error: (erro) => console.error('Erro ao excluir assunto', erro),
+      });
     }
   }
 }

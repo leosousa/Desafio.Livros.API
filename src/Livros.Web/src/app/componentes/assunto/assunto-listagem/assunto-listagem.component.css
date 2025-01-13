@@ -20,3 +20,13 @@ button:disabled {
 .btn-sm i {
   font-size: 1rem;
 }
+
+.btn-success {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 0.25rem;
+}
+
+  .btn-success .bi {
+    font-size: 1.25rem; /* Ajuste o tamanho do ícone */
+  }

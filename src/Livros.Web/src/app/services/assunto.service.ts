@@ -8,15 +8,9 @@ import { Assunto, AssuntoListagem } from '../models/assunto.model';
 })
 export class AssuntoService {
 
-  //private apiUrl = '/api/assuntos?numeroPagina=1&tamanhoPagina=10';
   private readonly baseUrl = '/api'; // Use apenas o caminho relativo
 
-
   constructor(private http: HttpClient) { }
-
-  //getAssuntos(): Observable<AssuntoListagem> {
-  //  return this.http.get<AssuntoListagem>(`${this.baseUrl}/assuntos?numeroPagina=1&tamanhoPagina=10`);
-  //}
 
   getAssuntosPaginados(pagina: number, tamanho: number, busca: string = ''): Observable<AssuntoListagem> {
     const params: any = {
@@ -28,6 +22,10 @@ export class AssuntoService {
     }
 
     return this.http.get<AssuntoListagem>(`${this.baseUrl}/assuntos`, { params });
+  }
+
+  cadastrarAssunto(assunto: Assunto): Observable<Assunto> {
+    return this.http.post<Assunto>(`${this.baseUrl}/assuntos`, assunto);
   }
 
   atualizarAssunto(assunto: Assunto): Observable<void> {

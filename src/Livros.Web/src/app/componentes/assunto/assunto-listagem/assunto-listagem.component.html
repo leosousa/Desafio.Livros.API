@@ -17,25 +17,17 @@
     </div>
   </div>
 
-  <!-- Tabela de Listagem -->
-  <!--<table class="table table-bordered table-striped">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Descrição</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of listagem.itens">
-        <td>{{ item.id }}</td>
-        <td>{{ item.descricao }}</td>
-      </tr>
-      <tr *ngIf="listagem.itens.length === 0">
-        <td colspan="2" class="text-center">Nenhum dado encontrado</td>
-      </tr>
-    </tbody>
-  </table>-->
+  <!-- Botão para abrir o modal de cadastro -->
+  <div class="d-flex justify-content-end mb-3">
+    <button class="btn p-0 text-success"
+            (click)="abrirModalCadastro()"
+            title="Adicionar Assunto">
+      <i class="bi bi-plus-circle-fill"></i>
+      <span class="ms-2">Adicionar</span>
+    </button>
+  </div>
 
+  <!-- Tabela de Listagem -->
   <table class="table table-bordered">
     <thead class="bg-dark text-white">
       <tr>
@@ -55,7 +47,7 @@
             <i class="bi bi-pencil-fill"></i>
           </button>
           <button class="btn icon-button text-danger"
-                  (click)="excluir(item.id)"
+                  (click)="abrirModalExcluir(item.id)"
                   title="Excluir">
             <i class="bi bi-trash-fill"></i>
           </button>
@@ -86,6 +78,34 @@
     </button>
   </div>
 
+  <!-- Modal de Cadastro -->
+  <div class="modal fade" id="modalCadastro" tabindex="-1" aria-labelledby="modalCadastroLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalCadastroLabel">Cadastrar Assunto</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="descricaoCadastro" class="form-label">Descrição</label>
+              <input type="text"
+                     id="descricaoCadastro"
+                     class="form-control"
+                     [(ngModel)]="novoAssunto.descricao"
+                     name="descricaoCadastro" />
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" (click)="salvarCadastro()">Salvar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Modal de Edição -->
   <div class="modal fade" id="modalEdicao" tabindex="-1" aria-labelledby="modalEdicaoLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -109,6 +129,25 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
           <button type="button" class="btn btn-primary" (click)="salvarEdicao()">Salvar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Confirmação de Exclusão -->
+  <div class="modal fade" id="modalExcluir" tabindex="-1" aria-labelledby="modalExcluirLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalExcluirLabel">Confirmar Exclusão</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Tem certeza que deseja excluir este assunto?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-danger" (click)="confirmarExclusao()">Sim, excluir</button>
         </div>
       </div>
     </div>
