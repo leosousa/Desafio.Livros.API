@@ -38,7 +38,7 @@
 
   <!-- Botão para abrir o modal de cadastro -->
   <div class="d-flex justify-content-end mb-3">
-    <button class="btn p-0 text-success"
+    <button class="btn p-0 text-primary"
             (click)="abrirModalCadastro()"
             title="Adicionar Assunto">
       <i class="bi bi-plus-circle-fill"></i>
@@ -63,23 +63,6 @@
                   title="Editar">
             <i class="bi bi-pencil-fill"></i>
           </button>
-          <!--<button class="btn icon-button text-danger"
-          (click)="abrirModalExcluir(item.id)"
-          title="Excluir">
-            <i class="bi bi-trash-fill"></i>
-          </button>-->
-                  <!--<button [disabled]="item.possuiLivrosAssociados"
-                  matTooltip="{{ item.possuiLivrosAssociados ? 'Não pode ser excluído porque tem livros associados.' : '' }}"
-                  (click)="excluir(item.id)">
-            Excluir
-          </button>-->
-                  <!--<button class="btn icon-button text-danger"
-                  [disabled]="item.possuiLivrosAssociados"
-                  (click)="abrirModalExcluir(item.id)"
-                  matTooltip="{{ item.possuiLivrosAssociados ? 'Não pode ser excluído porque tem livros associados.' : '' }}"
-                  title="Excluir">
-            <i class="bi bi-trash-fill"></i>-->
-          <!--</button>-->
           <div class="tooltip-container">
             <button [disabled]="item.possuiLivrosAssociados"
                   class="btn icon-button text-danger"

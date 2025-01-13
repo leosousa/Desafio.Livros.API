@@ -6,11 +6,13 @@ import { AppComponent } from './app.component';
 import { AssuntoListagemComponent } from './componentes/assunto/assunto-listagem/assunto-listagem.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { HomeComponent } from './componentes/home/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AssuntoListagemComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
