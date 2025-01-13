@@ -18,4 +18,9 @@ public class AutorItemResult
     /// Descrição do autor
     /// </summary>
     public string Nome { get; set; }
+
+    /// <summary>
+    /// Quantidade de livros associados ao autor
+    /// </summary>
+    public int QuantidadeLivros { get; set; }
 }

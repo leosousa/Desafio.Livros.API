@@ -2,6 +2,7 @@
 using Flunt.Notifications;
 using Livros.Dominio.Contratos.Servicos.Autor;
 using Livros.Dominio.DTOs;
+using Livros.Dominio.DTOs.Autor;
 using Livros.Dominio.Servicos.Autor.Listar;
 using MediatR;
 using AutorEntidade = Livros.Dominio.Entidades.Autor;
@@ -24,19 +25,19 @@ public class AutorListaPaginadaQueryHandler : Notifiable<Notification>,
     {
         var filtros = _mapper.Map<AutorListaFiltro>(request);
 
-        ListaPaginadaResult<AutorEntidade> autors = null;
+        ListaPaginadaResult<AutorComLivroDto> autores = null;
 
         if (filtros is not null)
         {
-            autors = await _servicoListagemAutor.ListarAsync(filtros, request.NumeroPagina, request.TamanhoPagina);
+            autores = await _servicoListagemAutor.ListarComLivrosAsync(filtros, request.NumeroPagina, request.TamanhoPagina);
         }
         else
         {
-            autors = await _servicoListagemAutor.ListarAsync(filtros!);
+            autores = await _servicoListagemAutor.ListarComLivrosAsync(filtros!);
         }
 
 
-        var result = _mapper.Map<AutorListaPaginadaQueryResult>(autors);
+        var result = _mapper.Map<AutorListaPaginadaQueryResult>(autores);
 
         return await Task.FromResult(result);
     }

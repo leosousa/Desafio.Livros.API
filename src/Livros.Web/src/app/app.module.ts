@@ -7,12 +7,14 @@ import { AssuntoListagemComponent } from './componentes/assunto/assunto-listagem
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './componentes/home/home/home.component';
+import { AutorListagemComponent } from './componentes/autor/autor-listagem/autor-listagem.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AssuntoListagemComponent,
     HomeComponent,
+    AutorListagemComponent,
   ],
   imports: [
     BrowserModule,

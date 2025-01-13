@@ -1,0 +1,98 @@
+.pagination {
+  margin-top: 20px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.table th {
+  text-align: center;
+  background-color: black;
+  color: white;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+.btn-sm i {
+  font-size: 1rem;
+}
+
+.btn-success {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 0.25rem;
+}
+
+  .btn-success .bi {
+    font-size: 1.25rem; /* Ajuste o tamanho do ícone */
+  }
+
+.toast {
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+  .toast.show {
+    opacity: 1;
+  }
+
+  .toast.bg-success {
+    color: #fff;
+    background-color: #198754;
+  }
+
+  .toast.bg-danger {
+    color: #fff;
+    background-color: #dc3545;
+  }
+
+
+.page-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+  .page-link i {
+    font-size: 1rem; /* Aumenta o tamanho do ícone */
+  }
+
+.tooltip-container {
+  position: relative;
+  display: inline-block;
+}
+
+  .tooltip-container .tooltip-text {
+    font-size: 0.75rem;
+    visibility: hidden;
+    width: 200px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 5px;
+    border-radius: 5px;
+    /* Posicionamento */
+    position: absolute;
+    bottom: 125%; /* Ajuste para posicionar acima do botão */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    /* Transição para suavizar */
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .tooltip-container:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+  }
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  border: none;
+}
