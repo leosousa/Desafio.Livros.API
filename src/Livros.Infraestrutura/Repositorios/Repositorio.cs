@@ -50,10 +50,23 @@ public abstract class Repositorio<T> : IRepositorio<T> where T : Entidade
         return await _dbSet.ToListAsync();
     }
 
-    public virtual async Task<IEnumerable<T>> ListarAsync(Expression<Func<T, bool>> predicado, int numeroPagina, int tamanhoPagina)
+    public virtual async Task<IEnumerable<T>> ListarAsync(
+        Expression<Func<T, bool>> predicado, 
+        int numeroPagina, 
+        int tamanhoPagina,
+        Expression<Func<T, object>>? campoOrdenacao = null,
+        bool ordenacaoAscendente = true)
     {
-        return await _dbSet
-            .Where(predicado)
+        IQueryable<T> query = _dbSet.Where(predicado);
+
+        if (campoOrdenacao != null)
+        {
+            query = ordenacaoAscendente
+                ? query.OrderBy(campoOrdenacao)
+                : query.OrderByDescending(campoOrdenacao);
+        }
+
+        return await query
             .Skip(numeroPagina * tamanhoPagina)
             .Take(tamanhoPagina)
             .ToListAsync();

@@ -34,7 +34,7 @@ public class ServicoListagemAutorTeste
         .ReturnsAsync(numeroItens);
 
         _repositorioAutor.Setup(repository =>
-            repository.ListarAsync(It.IsAny<Expression<Func<Autor, bool>>>(), It.IsAny<int>(), It.IsAny<int>()))
+            repository.ListarAsync(It.IsAny<Expression<Func<Autor, bool>>>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<Expression<Func<Autor, object>>>(), It.IsAny<bool>()))
         .ReturnsAsync(listaSemItens);
 
         var servicoDominio = GerarCenario();
@@ -58,7 +58,7 @@ public class ServicoListagemAutorTeste
         .ReturnsAsync(numeroItens);
 
         _repositorioAutor.Setup(repository =>
-            repository.ListarAsync(It.IsAny<Expression<Func<Autor, bool>>>(), It.IsAny<int>(), It.IsAny<int>()))
+            repository.ListarAsync(It.IsAny<Expression<Func<Autor, bool>>>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<Expression<Func<Autor, object>>>(), It.IsAny<bool>()))
         .ReturnsAsync(listaComItens);
 
         var servicoDominio = GerarCenario();

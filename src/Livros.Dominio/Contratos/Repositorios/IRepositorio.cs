@@ -18,8 +18,14 @@ public interface IRepositorio<T> where T : Entidade
     /// <param name="predicado">Expressão lambda de filtro de busca</param>
     /// <param name="numeroPagina">Número da página</param>
     /// <param name="tamanhoPagina">Tamanho da página</param>
+    /// <param name="campoOrdenacao">Campo de ordenação</param>
+    /// <param name="ordenacaoAscendente">Ordenação ascendente (true) ou descendente (false)</param>
     /// <returns>Lista de registros encontrados</returns>
-    Task<IEnumerable<T>> ListarAsync(Expression<Func<T, bool>> predicado, int numeroPagina, int tamanhoPagina);
+    Task<IEnumerable<T>> ListarAsync(Expression<Func<T, bool>> predicado, 
+        int numeroPagina, 
+        int tamanhoPagina,
+        Expression<Func<T, object>>? campoOrdenacao = null,
+        bool ordenacaoAscendente = true);
 
     /// <summary>
     /// Conta os registros na base de dados de acordo com os filtros informados

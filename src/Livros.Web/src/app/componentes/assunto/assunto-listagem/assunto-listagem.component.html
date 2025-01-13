@@ -50,14 +50,12 @@
   <table class="table table-bordered">
     <thead class="bg-dark text-white">
       <tr>
-        <th>ID</th>
         <th>Descrição</th>
         <th class="text-center">Ações</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let item of listagem.itens">
-        <td>{{ item.id }}</td>
         <td>{{ item.descricao }}</td>
         <td class="text-center">
           <button class="btn icon-button text-warning me-2"
@@ -77,25 +75,6 @@
       </tr>
     </tbody>
   </table>
-
-  <!-- Controles de Paginação -->
-  <!--<div class="pagination justify-content-center">
-    <button class="btn btn-primary mx-1"
-            [disabled]="listagem.numeroPagina === 1"
-            (click)="mudarPagina(listagem.numeroPagina - 1)">
-      Anterior
-    </button>
-
-    <span class="align-self-center mx-2">
-      Página {{ listagem.numeroPagina }} de {{ listagem.totalPaginas }}
-    </span>
-
-    <button class="btn btn-primary mx-1"
-            [disabled]="listagem.numeroPagina === listagem.totalPaginas"
-            (click)="mudarPagina(listagem.numeroPagina + 1)">
-      Próxima
-    </button>
-  </div>-->
 
 <div class="d-flex justify-content-center mt-3">
   <nav>

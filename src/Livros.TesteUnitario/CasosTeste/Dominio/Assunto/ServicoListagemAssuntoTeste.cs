@@ -34,7 +34,7 @@ public class ServicoListagemAssuntoTeste
         .ReturnsAsync(numeroItens);
 
         _repositorioAssunto.Setup(repository =>
-            repository.ListarAsync(It.IsAny<Expression<Func<Assunto, bool>>>(), It.IsAny<int>(), It.IsAny<int>()))
+            repository.ListarAsync(It.IsAny<Expression<Func<Assunto, bool>>>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<Expression<Func<Assunto, object>>>(), It.IsAny<bool>()))
         .ReturnsAsync(listaSemItens);
 
         var servicoDominio = GerarCenario();
@@ -58,7 +58,7 @@ public class ServicoListagemAssuntoTeste
         .ReturnsAsync(numeroItens);
 
         _repositorioAssunto.Setup(repository =>
-            repository.ListarAsync(It.IsAny<Expression<Func<Assunto, bool>>>(), It.IsAny<int>(), It.IsAny<int>()))
+            repository.ListarAsync(It.IsAny<Expression<Func<Assunto, bool>>>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<Expression<Func<Assunto, object>>>(), It.IsAny<bool>()))
         .ReturnsAsync(listaComItens);
 
         var servicoDominio = GerarCenario();

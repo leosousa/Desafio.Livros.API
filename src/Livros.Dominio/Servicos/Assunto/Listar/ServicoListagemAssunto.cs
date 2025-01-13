@@ -36,7 +36,7 @@ public class ServicoListagemAssunto : Notifiable<Notification>, IServicoListagem
         // Ao enviar para o repositório, trabalhamos com o conceito de página 0 até N,
         // para sabermos quantos registros pular internamente na busca, por isso enviamos
         // numeroPagina - 1
-        var assuntos = await _repositorioAssunto.ListarAsync(predicado, numeroPagina - 1, tamanhoPagina);
+        var assuntos = await _repositorioAssunto.ListarAsync(predicado, numeroPagina - 1, tamanhoPagina, e => e.Descricao);
 
         var totalPaginas = quantidadeProdutos / tamanhoPagina;
 

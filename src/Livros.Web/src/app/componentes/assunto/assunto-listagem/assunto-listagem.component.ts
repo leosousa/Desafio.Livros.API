@@ -79,13 +79,6 @@ export class AssuntoListagemComponent implements OnInit {
     }
   }
 
-  //mudarPagina(novaPagina: number): void {
-  //  if (novaPagina >= 1 && novaPagina <= this.listagem.totalPaginas) {
-  //    this.listagem.numeroPagina = novaPagina;
-  //    this.carregarListagem();
-  //  }
-  //}
-
   mudarPagina(pagina: number): void {
     if (pagina > 0 && pagina <= this.listagem.totalPaginas) {
       this.listagem.numeroPagina = pagina;
